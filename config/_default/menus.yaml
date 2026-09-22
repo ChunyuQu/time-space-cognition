@@ -10,14 +10,14 @@ main:
   - name: Papers
     url: /#papers
     weight: 11
+  - name: Research
+    url: research/
+    weight: 12
   - name: Reading Notes
     url: reading/
-    weight: 12
+    weight: 13
   - name: Modeling Notes
     url: modeling/
-    weight: 13
-  - name: News
-    url: /#news
     weight: 14
   - name: Experience
     url: experience/
