@@ -1,8 +1,8 @@
 {{- $links := slice
       (dict "label" "Home" "href" "/")
       (dict "label" "Research" "href" "/research/")
-      (dict "label" "Marginalia" "href" "/reading/")
-      (dict "label" "Workbench" "href" "/modeling/")
+      (dict "label" "Time-Space Trail" "href" "/reading/")
+      (dict "label" "Model Workshop" "href" "/modeling/")
       (dict "label" "Publications" "href" "/publications/")
       (dict "label" "Projects" "href" "/projects/")
       (dict "label" "Experience" "href" "/experience/")
@@ -17,7 +17,9 @@
       </a>
 
       {{/* Desktop menu */}}
-      <div class="hidden lg:flex space-x-6">
+      {{/* Eight items need a little more room than the previous six, so the gaps
+           tighten below the xl breakpoint and match the previous site at xl and up. */}}
+      <div class="hidden lg:flex lg:space-x-4 xl:space-x-6">
         {{- range $links }}
           {{- $isCurrent := eq .href $.RelPermalink }}
           <a href="{{ .href | relURL }}"
