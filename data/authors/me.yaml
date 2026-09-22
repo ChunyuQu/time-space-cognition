@@ -2,115 +2,178 @@ schema: hugoblox/author/v1
 slug: me
 is_owner: true
 name:
-  display: Dr. Alex Johnson
-  given: Alex
-  family: Johnson
-  alternate: ''  # Example: 王伟
-  pronunciation: ''  # Example: Wáng Wěi
-  pronouns: he/him
-postnominals:
-  - PhD
-  - MIEEE
-status:
-  icon: "☕️"
-role: Senior AI Research Scientist
+  display: Chunyu Qu
+  given: Chunyu
+  family: Qu
+  alternate: 曲春宇
+  pronunciation: ''
+  pronouns: ''
+role: PhD Student, Neuro-Cognitive Psychology
 bio: |
-  Alex Johnson is a Senior AI Research Scientist at Meta AI. His research
-  has been published in top conferences like NeurIPS and ICML, with over
-  10,000 citations. Alex is passionate about pushing the boundaries of AI
-  while ensuring ethical development.
+  I am a PhD student in Neuro-Cognitive Psychology at LMU Munich, working with
+  Prof. Dr. Zhuanghua Shi. I study how recent experiences shape what we perceive
+  and decide, using computational models together with behavioral and neural data.
+  My work focuses on serial dependence, the perception of time and space, and how
+  history is retained and read out in the brain.
 
 affiliations:
-  - name: Meta AI
-    url: https://ai.meta.com/
+  - name: Ludwig-Maximilians-Universität München
+    url: https://www.psy.lmu.de/
 
 links:
   - icon: at-symbol
-    url: mailto:alex.johnson@example.com
+    url: mailto:chunyu.qu@psy.lmu.de
     label: E-mail Me
-  - icon: brands/x
-    url: https://x.com/example
   - icon: brands/github
-    url: https://github.com/example
-  - icon: brands/linkedin
-    url: https://www.linkedin.com/in/example/
+    url: https://github.com/ChunyuQu
   - icon: academicons/google-scholar
-    url: https://scholar.google.com/citations?user=example
+    url: https://scholar.google.com/citations?user=xZbDxhoAAAAJ
   - icon: academicons/orcid
-    url: https://orcid.org/0000-0002-1825-0097
+    url: https://orcid.org/0000-0002-7872-4645
 
 interests:
-  - Large Language Models
-  - Computer Vision
-  - Reinforcement Learning
-  - AI Ethics
+  - Serial dependence
+  - Perception of time and space
+  - Computational modeling
+  - Neural dynamics
 
 education:
-  - degree: PhD Computer Science
-    institution: Stanford University
-    start: 2015-09-01
-    end: 2019-06-30
+  - degree: PhD in Neuro-Cognitive Psychology
+    institution: Ludwig-Maximilians-Universität München
+    start: 2025-10-01
     summary: |
-      Thesis on scaling laws for neural language models. Published 5 papers in NeurIPS and ICML.
-    button:
-      text: Download dissertation
-      url: /resume.pdf
-      icon: hero/arrow-down-tray
-  - degree: MS Computer Science
-    institution: Carnegie Mellon University
-    start: 2013-09-01
-    end: 2015-05-31
-  - degree: BS Computer Science
-    institution: MIT
-    start: 2009-09-01
-    end: 2013-05-31
+      CSC Full Scholarship. Admitted to the Graduate School of Systemic Neurosciences (GSN).
+      Supervisor: Prof. Dr. Zhuanghua Shi. Research on mechanisms of temporal integration
+      and serial dependence.
+  - degree: M.Ed. Research on Teaching and Learning
+    institution: Technische Universität München
+    start: 2023-10-01
+    end: 2025-08-31
+    summary: |
+      GPA 1.1/1.0. Cognitive psychology, learning science, and brain-computer interfaces.
+  - degree: B.Sc. Psychology
+    institution: Zhengzhou University
+    start: 2019-09-01
+    end: 2023-06-30
+    summary: |
+      GPA 3.64/4.0. Focus on cognitive psychology and neuroscience.
 
 experience:
-  - role: Senior AI Research Scientist
-    org: Meta AI
-    start: 2020-01-01
+  - role: PhD Student and Researcher
+    org: Ludwig-Maximilians-Universität München
+    start: 2025-10-01
     summary: |
-      Leading research on multimodal AI systems. Contributed to Llama 2 and other open-source models.
-    button:
-      text: View portfolio
-      url: /
-      icon: hero/arrow-down-tray
-  - role: AI Research Intern
-    org: OpenAI
-    start: 2019-06-01
-    end: 2019-12-31
+      Mechanisms of temporal integration and serial dependence in human cognition,
+      combining behavioral modeling and neuroimaging.
+  - role: Project Coordinator, EyeCon VR/AR Lab (Erasmus+ KA210-VET)
+    org: LMU Munich and Çanakkale Onsekiz Mart University
+    start: 2025-11-01
+    end: 2027-05-31
     summary: |
-      Worked on GPT-3 scaling. Co-authored paper on prompt engineering.
+      Coordinating a joint VR and EEG training program between LMU Munich and ÇOMU:
+      training modules, international exchanges, and multiplier events.
+  - role: Guest Researcher
+    org: Max Planck Institute for Biological Intelligence
+    start: 2025-10-01
+    end: 2026-09-30
+    summary: |
+      Analysis and modeling of calcium imaging and EMG data from mice. Motion correction,
+      ROI segmentation, and neuronal activity visualization.
+  - role: Research Intern, Brain-Computer Interface
+    org: Munich Institute of Biomedical Engineering, Technical University of Munich
+    start: 2024-05-01
+    end: 2024-11-30
+    summary: |
+      Hybrid brain-computer interface using fNIRS and EEG, with visual stimulus
+      experiments in a virtual reality environment.
+  - role: Research Intern, Alzheimer's Disease Lab
+    org: Shenzhen Bay Laboratory
+    start: 2023-04-01
+    end: 2023-09-30
+    summary: |
+      Supervised by Dr. Tengfei Guo. Contributed to experiment design and execution,
+      and conducted fMRI data analysis for studies on sleep, wakefulness, and light exposure.
 
 skills:
-  - name: Technical Skills
+  - name: Behavioral methods
     items:
-      - label: Python
+      - label: Psychophysics
         level: 5
-      - label: Machine Learning
+      - label: VR experiments
         level: 5
-      - label: Cloud Computing
-        level: 4
-  - name: Research & Communication
+      - label: Eye tracking
+        level: 5
+  - name: Neuroimaging
     items:
-      - label: Academic Writing
+      - label: fMRI
         level: 5
-      - label: Conference Presentations
+      - label: EEG
+        level: 5
+      - label: fNIRS
         level: 4
-      - label: Grant Proposals
+      - label: Calcium imaging
+        level: 4
+  - name: Computational
+    items:
+      - label: Bayesian modeling
+        level: 5
+      - label: Kalman filtering
+        level: 5
+      - label: Latent dynamics
+        level: 4
+      - label: Deep learning
+        level: 4
+  - name: Engineering
+    items:
+      - label: Python and PyTorch
+        level: 5
+      - label: C# and Unity
+        level: 4
+      - label: FSL and fMRIPrep
         level: 4
 
 languages:
-  - name: English
+  - name: Chinese
     level: 5
     label: Native
-  - name: Spanish
-    level: 4
+  - name: English
+    level: 5
     label: Fluent
 
 awards:
-  - title: Best Paper Award
-    awarder: NeurIPS
-    date: "2022-12-01"
-    summary: Awarded for groundbreaking work on efficient training of large models.
-    icon: hero/trophy
+  - title: China Scholarship Council (CSC) PhD Scholarship
+    awarder: Ministry of Education, China
+    date: "2025-09-01"
+    summary: Four years of full funding (09/2025 - 09/2029).
+  - title: TUM International Student Scholarship
+    awarder: Technical University of Munich
+    date: "2024-04-01"
+    summary: Summer semester 2024, stipend of 1,600 EUR.
+  - title: TUM International Student Scholarship
+    awarder: Technical University of Munich
+    date: "2025-04-01"
+    summary: Summer semester 2025, stipend of 1,300 EUR.
+  - title: National Inspirational Scholarship
+    awarder: Ministry of Education, China
+    date: "2020-10-01"
+    summary: Top 3 percent, Henan Province.
+  - title: National Inspirational Scholarship
+    awarder: Ministry of Education, China
+    date: "2021-10-01"
+    summary: Top 3 percent, Henan Province.
+  - title: National Inspirational Scholarship
+    awarder: Ministry of Education, China
+    date: "2022-10-01"
+    summary: Top 3 percent, Henan Province.
+  - title: Merit Student Award
+    awarder: Zhengzhou University
+    date: "2020-10-01"
+    summary: Top 10 percent.
+  - title: Merit Student Award
+    awarder: Zhengzhou University
+    date: "2021-10-01"
+    summary: Top 10 percent.
+  - title: Merit Student Award
+    awarder: Zhengzhou University
+    date: "2022-10-01"
+    summary: Top 10 percent.

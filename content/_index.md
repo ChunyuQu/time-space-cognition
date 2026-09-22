@@ -11,10 +11,6 @@ sections:
       # Choose a user profile to display (a folder name within `content/authors/`)
       username: me
       text: ''
-      # Show a call-to-action button under your biography? (optional)
-      button:
-        text: Download CV
-        url: uploads/resume.pdf
       headings:
         about: ''
         education: ''
@@ -32,17 +28,17 @@ sections:
       # Avatar customization
       avatar:
         size: medium # Options: small (150px), medium (200px, default), large (320px), xl (400px), xxl (500px)
-        shape: circle # Options: circle (default), square, rounded
+        shape: rounded # Options: circle (default), square, rounded
   - block: markdown
     content:
-      title: '📚 My Research'
+      title: 'My Research'
       subtitle: ''
       text: |-
-        Use this area to speak to your mission. I'm a research scientist in the Moonshot team at DeepMind. I blog about machine learning, deep learning, and moonshots.
+        Perception is not a snapshot. What we saw and judged a moment ago biases what we perceive now. This is serial dependence. My research asks how the brain carries that history: which parts of the past are kept, how strongly they weigh on the present, and how the current task controls what gets read out.
 
-        I apply a range of qualitative and quantitative methods to comprehensively investigate the role of science and technology in the economy.
+        I build generative models, Kalman filters and latent dynamics models in which dependence on history emerges from Bayesian inference, and test their predictions in human behavior, in fMRI and EEG, in mouse calcium imaging, and in brain-computer interfaces that run in real time.
 
-        Please reach out to collaborate 😃
+        If you work on related questions, I would be glad to hear from you.
     design:
       columns: '1'
   - block: collection
