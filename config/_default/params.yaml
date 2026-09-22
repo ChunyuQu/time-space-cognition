@@ -21,9 +21,7 @@ hugoblox:
     # Short tagline displayed on your site
     tagline: ""
     # Site meta description for search engines and social sharing
-    description: "Chunyu Qu is a PhD student in Neuro-Cognitive Psychology at LMU
-      Munich. His research studies serial dependence, the perception of time and
-      space, and computational modeling of how the past shapes perception."
+    description: "Chunyu Qu is a PhD student in Neuro-Cognitive Psychology at LMU Munich, studying serial dependence, the perception of time and space, and computational modeling."
     # Social accounts (used for meta tags like Twitter Cards)
     social:
       twitter: "" # Twitter/X handle for Twitter Cards (without @)
