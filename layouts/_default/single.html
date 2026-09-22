@@ -2,7 +2,7 @@
 <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
   <h1 class="text-4xl font-bold text-gray-900 mb-3">{{ .Title }}</h1>
   <p class="text-gray-500 text-sm mb-8">{{ .Date.Format "2 January 2006" }}</p>
-  <div class="text-gray-700 leading-relaxed space-y-4">{{ .Content }}</div>
+  <div class="note-body text-gray-700 leading-relaxed">{{ .Content }}</div>
   <p class="mt-12"><a href="{{ .CurrentSection.RelPermalink }}" class="text-blue-700 hover:underline font-medium">← {{ .CurrentSection.Title }}</a></p>
 </article>
 {{ end }}

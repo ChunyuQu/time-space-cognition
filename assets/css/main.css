@@ -30,3 +30,90 @@ a {
   html { scroll-behavior: auto; }
   a { transition: none; }
 }
+
+/* Styles for Markdown-authored note bodies.
+   The global reset above strips margins and Tailwind's preflight strips
+   heading sizes and link colours, so prose written in content/ needs its own
+   rules. Scoped to .note-body so page layouts built from templates are
+   unaffected. */
+.note-body > * + * {
+  margin-top: 1.25rem;
+}
+
+.note-body h2 {
+  @apply text-2xl font-bold text-gray-900;
+  margin-top: 2.5rem;
+}
+
+.note-body h3 {
+  @apply text-lg font-semibold text-gray-900;
+  margin-top: 2rem;
+}
+
+.note-body h2 + *,
+.note-body h3 + * {
+  margin-top: 0.75rem;
+}
+
+.note-body a {
+  @apply text-blue-700 underline underline-offset-2 hover:text-blue-900;
+}
+
+.note-body strong {
+  @apply font-semibold text-gray-900;
+}
+
+.note-body ul,
+.note-body ol {
+  padding-left: 1.5rem;
+}
+
+.note-body ul { list-style: disc; }
+.note-body ol { list-style: decimal; }
+
+.note-body li + li {
+  margin-top: 0.5rem;
+}
+
+.note-body li::marker {
+  @apply text-gray-400;
+}
+
+.note-body code {
+  @apply bg-gray-100 text-gray-800 rounded px-1.5 py-0.5 text-[0.875em] font-mono;
+}
+
+.note-body pre {
+  @apply bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto text-sm;
+}
+
+.note-body pre code {
+  @apply bg-transparent text-inherit p-0;
+}
+
+/* Tables carry the notebook listings, so they need to stay readable on a
+   phone: the wrapper scrolls rather than the page. */
+.note-body .table-wrap {
+  @apply overflow-x-auto;
+}
+
+.note-body table {
+  @apply w-full text-sm border-collapse;
+}
+
+.note-body th {
+  @apply text-left font-semibold text-gray-900 border-b border-gray-300 py-2 pr-4 align-bottom;
+}
+
+.note-body td {
+  @apply border-b border-gray-200 py-2 pr-4 align-top;
+}
+
+.note-body blockquote {
+  @apply border-l-4 border-blue-500 pl-4 text-gray-600;
+}
+
+.note-body hr {
+  @apply border-gray-200;
+  margin-top: 2.5rem;
+}

@@ -1,0 +1,25 @@
+{{/* Markdown tables get a scrolling wrapper so wide listings do not force the
+     whole page to scroll sideways on a phone. */}}
+<div class="table-wrap">
+  <table
+    {{- range $k, $v := .Attributes }}{{ with $v }} {{ $k | safeHTMLAttr }}="{{ $v }}"{{ end }}{{ end }}>
+    <thead>
+      {{- range .THead }}
+      <tr>
+        {{- range . }}
+        <th{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</th>
+        {{- end }}
+      </tr>
+      {{- end }}
+    </thead>
+    <tbody>
+      {{- range .TBody }}
+      <tr>
+        {{- range . }}
+        <td{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</td>
+        {{- end }}
+      </tr>
+      {{- end }}
+    </tbody>
+  </table>
+</div>
