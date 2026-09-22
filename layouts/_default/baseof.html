@@ -2,8 +2,9 @@
 <html lang="en">
 {{ partial "head.html" . }}
 <body class="flex flex-col min-h-screen">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:text-blue-700 focus:shadow-lg">Skip to main content</a>
   {{ partial "navbar.html" . }}
-  <main class="flex-grow">
+  <main id="main-content" class="flex-grow" tabindex="-1">
     {{ block "main" . }}{{ end }}
   </main>
   {{ partial "footer.html" . }}

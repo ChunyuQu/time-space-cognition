@@ -43,6 +43,21 @@
   ]
 }
 </script>
+{{ else if .IsPage }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "url": "{{ .Permalink }}",
+  "headline": "{{ .Title }}",
+  "description": "{{ .Params.description | default site.Params.description }}",
+  "datePublished": "{{ .Date.Format "2006-01-02" }}",
+  "author": { "@id": "{{ $personId }}" },
+  "inLanguage": "en",
+  "isPartOf": { "@id": "{{ $base }}#website" },
+  "about": { "@id": "{{ $personId }}" }
+}
+</script>
 {{ else }}
 <script type="application/ld+json">
 {

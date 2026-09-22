@@ -1,10 +1,9 @@
 {{- $links := slice
-      (dict "label" "Home" "href" "/")
       (dict "label" "Research" "href" "/research/")
-      (dict "label" "Time-Space Trail" "href" "/reading/")
-      (dict "label" "Model Workshop" "href" "/modeling/")
       (dict "label" "Publications" "href" "/publications/")
       (dict "label" "Projects" "href" "/projects/")
+      (dict "label" "Spacetime Rift" "href" "/reading/")
+      (dict "label" "Model Emergence" "href" "/modeling/")
       (dict "label" "Experience" "href" "/experience/")
       (dict "label" "Contact" "href" "/contact/")
 -}}
@@ -17,8 +16,7 @@
       </a>
 
       {{/* Desktop menu */}}
-      {{/* Eight items need a little more room than the previous six, so the gaps
-           tighten below the xl breakpoint and match the previous site at xl and up. */}}
+      {{/* The compact gap keeps all primary destinations comfortable at laptop widths. */}}
       <div class="hidden lg:flex lg:space-x-4 xl:space-x-6">
         {{- range $links }}
           {{- $isCurrent := eq .href $.RelPermalink }}
@@ -63,10 +61,17 @@
       menu.hidden = !open;
       btn.setAttribute('aria-expanded', String(open));
       btn.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+      if (open) {
+        var firstLink = menu.querySelector('a');
+        if (firstLink) firstLink.focus();
+      }
     }
     btn.addEventListener('click', function () { setOpen(menu.hidden); });
     document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') setOpen(false);
+      if (event.key === 'Escape' && !menu.hidden) {
+        setOpen(false);
+        btn.focus();
+      }
     });
   })();
 </script>

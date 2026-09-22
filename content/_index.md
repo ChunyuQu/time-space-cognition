@@ -9,11 +9,11 @@ hero:
   tagline: I study how recent experiences shape what we perceive and decide, using computational models and behavioral and neural data.
   image: /images/profile-photo.jpg
   buttons:
+    - label: Download CV
+      href: /uploads/resume.pdf
+      style: primary
     - label: Publications
       href: /publications/
-      style: primary
-    - label: Experience
-      href: /experience/
       style: secondary
     - label: Contact
       href: /contact/
@@ -23,6 +23,7 @@ selected:
   - id: precision-weighted-updating
     heading: How does the past shape perception?
     summary: A computational account of serial dependence across sensory and contextual transitions, using precision-weighted updating.
+    finding: Dependence on history emerges from precision-weighted inference across perceptual, memory, and decision states—without an ad hoc learning rule.
     image: /images/kalman-filter-3state.png
     alt: Diagram of the three-state Kalman filter model
   - id: attentional-thief

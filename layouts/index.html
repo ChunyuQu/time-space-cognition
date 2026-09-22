@@ -18,9 +18,14 @@
               <a href="{{ .href | relURL }}" class="{{ $cls }}">{{ .label }}</a>
             {{- end }}
           </div>
+          <div class="flex flex-wrap gap-x-5 gap-y-2 mt-5 text-sm font-medium text-gray-600" aria-label="Academic profiles">
+            <a href="https://scholar.google.com/citations?user=xZbDxhoAAAAJ" target="_blank" rel="noopener noreferrer" class="hover:text-blue-700 hover:underline">Google Scholar ↗</a>
+            <a href="https://orcid.org/0000-0002-7872-4645" target="_blank" rel="noopener noreferrer" class="hover:text-blue-700 hover:underline">ORCID ↗</a>
+            <a href="https://github.com/ChunyuQu" target="_blank" rel="noopener noreferrer" class="hover:text-blue-700 hover:underline">GitHub ↗</a>
+          </div>
         </div>
         <div class="rounded-lg overflow-hidden border border-gray-200">
-          <img src="{{ $page.Params.hero.image }}" alt="{{ $page.Params.hero.name }}" class="w-full h-auto" />
+          <img src="{{ $page.Params.hero.image }}" alt="{{ $page.Params.hero.name }}" width="1280" height="1382" class="w-full h-auto" decoding="async" />
         </div>
       </div>
     </div>
@@ -47,7 +52,7 @@
             {{- with $work.image }}
             <figure class="mb-5">
               <a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="Enlarge figure: {{ $work.heading }}" class="block rounded-lg">
-                <img src="{{ . }}" alt="{{ $work.alt }}" class="w-full h-56 object-contain" loading="lazy" />
+                <img src="{{ . }}" alt="{{ $work.alt }}" class="w-full h-56 object-contain" loading="lazy" decoding="async" />
               </a>
               {{- with $work.source }}
               <figcaption class="text-xs text-gray-500 mt-2">Experimental design and recording setup. Figure: <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-blue-700 hover:underline">MSense Lab</a>. Click the figure to enlarge.</figcaption>

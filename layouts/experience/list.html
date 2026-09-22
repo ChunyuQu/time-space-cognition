@@ -1,7 +1,7 @@
 {{ define "main" }}
 <div>
   {{/* Hero */}}
-  <section class="bg-gradient-to-br from-indigo-50 to-indigo-100 py-16">
+  <section class="bg-gradient-to-br from-blue-50 to-blue-100 py-16">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ .Title }}</h1>
       <p class="text-lg text-gray-700">
@@ -19,7 +19,10 @@
             <img
               src="{{ .Params.profile.photo }}"
               alt="{{ .Params.profile.name }}"
+              width="1280"
+              height="1382"
               class="w-full h-auto rounded-lg shadow-md"
+              decoding="async"
             />
           </div>
           <div class="md:col-span-2 p-8">
@@ -35,6 +38,10 @@
               </p>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-sm">
+              <div>
+                <p class="text-gray-600 font-semibold">Curriculum vitae</p>
+                <a href="{{ "uploads/resume.pdf" | relURL }}" class="text-blue-700 hover:underline">Download CV ↓</a>
+              </div>
               <div>
                 <p class="text-gray-600 font-semibold">Email</p>
                 <a href="{{ "contact/" | relURL }}" class="text-blue-700 hover:underline">View contact details →</a>
