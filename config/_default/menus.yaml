@@ -26,23 +26,54 @@ main:
     url: projects/
     weight: 30
 
-# Footer columns (used by the `columns` footer style)
+# Footer columns (used by the `columns` footer style).
+# Top-level items become column headings; items with a `parent` become their links.
+# Hugo builds the tree from the `parent` reference, not from literal YAML nesting.
 footer:
-  - name: Research
-    url: research/
+  - name: Explore
+    identifier: explore
     weight: 10
+  - name: Research
+    parent: explore
+    url: research/
+    weight: 11
   - name: Publications
+    parent: explore
     url: publications/
-    weight: 20
+    weight: 12
   - name: Projects
+    parent: explore
     url: projects/
-    weight: 30
+    weight: 13
   - name: Experience
+    parent: explore
     url: experience/
-    weight: 40
+    weight: 14
+
+  - name: Notes
+    identifier: notes
+    weight: 20
   - name: Reading Notes
+    parent: notes
     url: reading/
-    weight: 50
+    weight: 21
   - name: Modeling Notes
+    parent: notes
     url: modeling/
-    weight: 60
+    weight: 22
+
+  - name: Connect
+    identifier: connect
+    weight: 30
+  - name: E-mail
+    parent: connect
+    url: mailto:chunyu.qu@psy.lmu.de
+    weight: 31
+  - name: Google Scholar
+    parent: connect
+    url: https://scholar.google.com/citations?user=xZbDxhoAAAAJ
+    weight: 32
+  - name: ORCID
+    parent: connect
+    url: https://orcid.org/0000-0002-7872-4645
+    weight: 33
