@@ -15,7 +15,17 @@
       {{- end }}
       <div class="space-y-6">
         {{- range .Pages }}
-        <article class="bg-white rounded-lg border border-gray-200 p-6 sm:p-8">
+        <article class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          {{- with .Params.cover }}
+          {{/* Dimensions come from the file so the card does not reflow once
+               the image loads. */}}
+          {{- $cfg := images.Config (printf "static%s" .) }}
+          <a href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true" class="block border-b border-gray-200 bg-white">
+            <img src="{{ . }}" alt="" width="{{ $cfg.Width }}" height="{{ $cfg.Height }}"
+                 class="w-full h-auto" loading="lazy" decoding="async" />
+          </a>
+          {{- end }}
+          <div class="p-6 sm:p-8">
           <h2 class="text-xl font-semibold text-gray-900 mb-2">
             <a href="{{ .RelPermalink }}" class="hover:text-blue-700">{{ .Title }}</a>
           </h2>
@@ -27,6 +37,7 @@
           {{- end }}
           {{- end }}
           <p class="text-sm text-gray-500">{{ .Date.Format "2 January 2006" }}</p>
+          </div>
         </article>
         {{- end }}
       </div>

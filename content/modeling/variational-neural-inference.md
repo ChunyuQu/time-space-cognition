@@ -1,6 +1,7 @@
 ---
 title: 'Variational Neural Inference: an executable tutorial'
 date: 2026-09-22
+cover: /images/vni/vae-architecture.webp
 summary: Eleven notebooks that run from tensors and gradients to sequential VAEs and interpretable nonlinear dynamics — a walkthrough of the models, the figures they produce, and what each one adds.
 ---
 
