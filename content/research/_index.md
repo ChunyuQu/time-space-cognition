@@ -1,68 +1,49 @@
 ---
 title: Research Program
-type: landing
-date: 2025-10-01
+description: 'How the past shapes perception and decisions, studied with computational models, neuroimaging, and data from multiple species'
+subtitle: How the past shapes perception and decisions, studied with computational models, neuroimaging, and data from multiple species
 
-sections:
-  - block: markdown
-    content:
-      title: What I Study
-      text: |-
-        Perception is not a snapshot. What we saw and judged a moment ago biases what we perceive now. This is serial dependence. My research asks how the brain carries that history: which parts of the past are kept, how strongly they weigh on the present, and how the current task controls what gets read out.
+intro:
+  - 'Perception is not a snapshot. What we saw and judged a moment ago biases what we perceive now — a phenomenon called <strong>serial dependence</strong>. My research asks how the brain carries this history: which parts of the past are kept, how strongly they weigh on the present, and how their readout is controlled by the current task.'
+  - 'I build generative models — Kalman filters and latent dynamics models in which dependence on history emerges from Bayesian inference — and test their predictions in human behavior, fMRI and EEG, in mouse calcium imaging, and in brain-computer interfaces that run in real time.'
 
-        I build generative models, Kalman filters and latent dynamics models in which dependence on history emerges from Bayesian inference, and test their predictions in human behavior, in fMRI and EEG, in mouse calcium imaging, and in brain-computer interfaces that run in real time.
-    design:
-      columns: '1'
+stages:
+  - stage: Integration
+    description: New input is weighted by its reliability
+    status: '✅ Submitted'
+  - stage: Retention
+    description: Which parts of the past are kept — and for how long
+    status: '🔧 In progress'
+  - stage: Readout
+    description: How the task at hand controls what history is expressed
+    status: '✍️ Writing'
+  - stage: Monitoring
+    description: How confidence tracks the uncertainty of the readout
+    status: '📊 Data in hand'
 
-  - block: markdown
-    content:
-      title: Research Framework
-      subtitle: Four stages of one modeling pipeline
-      text: |-
-        | Stage | Question | Status |
-        | --- | --- | --- |
-        | Integration | New input is weighted by its reliability | Submitted |
-        | Retention | Which parts of the past are kept, and for how long | In progress |
-        | Readout | How the task at hand controls what history is expressed | Writing |
-        | Monitoring | How confidence tracks the uncertainty of the readout | Data in hand |
-    design:
-      columns: '1'
+anchors:
+  - title: 'Computational Model: The Kalman Filter'
+    body: 'The core working model has three latent states: a perception of the current input, a memory that integrates past observations, and a decision that generates the response. In this model each update is weighted by its precision, which reproduces serial dependence across sensory and contextual transitions, without any ad hoc learning rule.'
+    list:
+      - '<strong>Perception state:</strong> current sensory input'
+      - '<strong>Memory state:</strong> integration of past information'
+      - '<strong>Decision state:</strong> response generation'
+    image: /images/kalman-filter-3state.png
+    image_alt: '3-State Kalman Filter Architecture'
+    frame: light
 
-  - block: markdown
-    content:
-      title: 'Computational Model: The Kalman Filter'
-      text: |-
-        The core working model has three latent states: a perception of the current input, a memory that integrates past observations, and a decision that generates the response. Each update is weighted by its precision, which reproduces serial dependence across sensory and contextual transitions without an ad hoc learning rule.
+  - title: 'Across Species: Mouse Calcium Imaging'
+    body: 'Do neurons in mouse cortex carry the same history from trial to trial? With the Max Planck Institute for Biological Intelligence, I analyze calcium imaging and EMG data — motion correction, ROI segmentation, and neuronal activity visualization — to test how sequential effects look at the neural level, across species.'
+    note: '<strong>Status:</strong> submitted to Neuron | <strong>Partner:</strong> MPI for Biological Intelligence'
+    image: /images/mouse-experiment.jpg
+    image_alt: 'Mouse Calcium Imaging'
+    frame: cover
+    mobile_first: true
 
-        1. Perception state: current sensory input
-        2. Memory state: integration of past information
-        3. Decision state: response generation
-
-        ![Three-state Kalman filter architecture](/images/kalman-filter-3state.png)
-    design:
-      columns: '1'
-
-  - block: markdown
-    content:
-      title: 'Across Species: Mouse Calcium Imaging'
-      text: |-
-        Do neurons in mouse cortex carry the same history from trial to trial? With the Max Planck Institute for Biological Intelligence, I analyze calcium imaging and EMG data, covering motion correction, ROI segmentation, and neuronal activity visualization, to test how sequential effects look at the neural level across species.
-
-        Partner: Max Planck Institute for Biological Intelligence. Status: submitted to Neuron.
-
-        ![Mouse calcium imaging setup](/images/mouse-experiment.jpg)
-    design:
-      columns: '1'
-
-  - block: markdown
-    content:
-      title: 'Application: Brain-Computer Interfaces'
-      text: |-
-        The same inference runs in real time. During my internship at the Munich Institute of Biomedical Engineering (TUM), I built hybrid fNIRS and EEG brain-computer interfaces with visual stimulation in virtual reality, decoding neural signals on the fly, where every millisecond of history matters.
-
-        Internship: MIBE, Technical University of Munich. Duration: 05/2024 to 11/2024.
-
-        ![Brain-computer interface research](/images/bci-internship.webp)
-    design:
-      columns: '1'
+  - title: 'Application: Brain-Computer Interfaces'
+    body: 'The same inference runs in real time. During my internship at the Munich Institute of Biomedical Engineering (TUM), I built hybrid fNIRS + EEG brain-computer interfaces with visual stimulation in virtual reality — decoding neural signals on the fly, where every millisecond of history matters.'
+    note: '<strong>Internship:</strong> MIBE, Technical University of Munich | <strong>Duration:</strong> 05/2024 – 11/2024'
+    image: /images/bci-internship.webp
+    image_alt: 'Brain-Computer Interface Research'
+    frame: cover
 ---

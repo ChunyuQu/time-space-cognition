@@ -1,0 +1,39 @@
+{{ define "main" }}
+<div>
+  <section class="bg-gradient-to-br from-blue-50 to-blue-100 py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ .Title }}</h1>
+      {{- with .Params.subtitle }}
+      <p class="text-lg text-gray-700">{{ . }}</p>
+      {{- end }}
+    </div>
+  </section>
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      {{- with .Content }}
+      <div class="text-gray-700 leading-relaxed mb-10">{{ . }}</div>
+      {{- end }}
+      <div class="space-y-6">
+        {{- range .Pages }}
+        <article class="bg-white rounded-lg border border-gray-200 p-6 sm:p-8">
+          <h2 class="text-xl font-semibold text-gray-900 mb-2">
+            <a href="{{ .RelPermalink }}" class="hover:text-blue-700">{{ .Title }}</a>
+          </h2>
+          {{- with .Params.summary }}
+          <p class="text-gray-600 mb-3">{{ . }}</p>
+          {{- else }}
+          {{- with .Summary }}
+          <p class="text-gray-600 mb-3">{{ . }}</p>
+          {{- end }}
+          {{- end }}
+          <p class="text-sm text-gray-500">{{ .Date.Format "2 January 2006" }}</p>
+        </article>
+        {{- end }}
+      </div>
+      {{- if not .Pages }}
+      <p class="text-gray-600">Notes will appear here as I write them.</p>
+      {{- end }}
+    </div>
+  </section>
+</div>
+{{ end }}

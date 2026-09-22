@@ -1,0 +1,55 @@
+<footer class="bg-gray-900 text-gray-400 py-12 mt-16">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+      <div>
+        <h3 class="text-white font-semibold mb-4">Contact</h3>
+        <p class="text-sm">
+          <a href="{{ "contact/" | relURL }}" class="hover:text-white">Get in touch</a>
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-white font-semibold mb-4">Affiliation</h3>
+        <p class="text-sm">
+          Ludwig-Maximilians-Universität München<br>
+          Department of Psychology
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-white font-semibold mb-4">Links</h3>
+        <ul class="text-sm space-y-2">
+          <li>
+            <a href="{{ "reading/" | relURL }}" class="hover:text-white">Reading Notes</a>
+          </li>
+          <li>
+            <a href="{{ "modeling/" | relURL }}" class="hover:text-white">Modeling Notes</a>
+          </li>
+          <li>
+            <a href="https://github.com/ChunyuQu" target="_blank" rel="noopener noreferrer" class="hover:text-white">
+              GitHub
+            </a>
+          </li>
+          <li>
+            <a href="https://scholar.google.com/citations?user=xZbDxhoAAAAJ" target="_blank" rel="noopener noreferrer" class="hover:text-white">
+              Google Scholar
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-white font-semibold mb-4">Research Interests</h3>
+        <p class="text-sm">
+          Spatial and Temporal Cognition<br>
+          Computational Modeling<br>
+          Serial Dependence
+        </p>
+      </div>
+    </div>
+
+    <div class="border-t border-gray-800 pt-8 text-center text-sm">
+      <p>&copy; {{ now.Year }} Chunyu Qu. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

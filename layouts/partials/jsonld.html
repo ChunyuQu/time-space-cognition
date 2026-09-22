@@ -1,0 +1,59 @@
+{{- $base := site.BaseURL -}}
+{{- $personId := printf "%s#person" $base -}}
+{{ if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "{{ $personId }}",
+      "name": "{{ site.Params.author }}",
+      "url": "{{ $base }}",
+      "jobTitle": "{{ site.Params.role }}",
+      "description": "{{ site.Params.tagline }}",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Ludwig-Maximilians-Universität München",
+        "url": "https://www.lmu.de/"
+      },
+      "sameAs": [
+        "https://scholar.google.com/citations?user=xZbDxhoAAAAJ",
+        "https://orcid.org/0000-0002-7872-4645",
+        "https://github.com/ChunyuQu"
+      ],
+      "knowsAbout": [
+        "Serial dependence",
+        "Time perception",
+        "Spatial cognition",
+        "Computational modeling",
+        "fMRI",
+        "EEG"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ $base }}#website",
+      "url": "{{ $base }}",
+      "name": "{{ site.Title }}",
+      "description": "{{ site.Params.description }}",
+      "inLanguage": "en",
+      "publisher": { "@id": "{{ $personId }}" }
+    }
+  ]
+}
+</script>
+{{ else }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "url": "{{ .Permalink }}",
+  "name": "{{ .Title }}",
+  "description": "{{ .Params.description | default site.Params.description }}",
+  "inLanguage": "en",
+  "isPartOf": { "@id": "{{ $base }}#website" },
+  "about": { "@id": "{{ $personId }}" }
+}
+</script>
+{{ end }}

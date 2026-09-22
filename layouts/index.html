@@ -1,0 +1,88 @@
+{{ define "main" }}
+{{ $page := . }}
+<div>
+  {{/* Hero */}}
+  <section class="bg-gradient-to-br from-gray-50 to-blue-50 py-16 sm:py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">{{ $page.Params.hero.name }}</h1>
+          <p class="text-xl text-gray-700 mb-2">{{ $page.Params.hero.role }}</p>
+          <p class="text-lg text-gray-600 mb-6">{{ $page.Params.hero.affiliation }}</p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">{{ $page.Params.hero.tagline }}</p>
+          <div class="flex flex-wrap gap-3">
+            {{- range $page.Params.hero.buttons }}
+              {{- $cls := "px-6 py-3 text-blue-700 rounded-lg hover:bg-blue-50 font-medium" }}
+              {{- if eq .style "primary" }}{{ $cls = "px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium" }}{{ end }}
+              {{- if eq .style "secondary" }}{{ $cls = "px-6 py-3 border border-blue-600 text-blue-700 rounded-lg hover:bg-blue-50 font-medium" }}{{ end }}
+              <a href="{{ .href | relURL }}" class="{{ $cls }}">{{ .label }}</a>
+            {{- end }}
+          </div>
+        </div>
+        <div class="rounded-lg overflow-hidden border border-gray-200">
+          <img src="{{ $page.Params.hero.image }}" alt="{{ $page.Params.hero.name }}" class="w-full h-auto" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{/* Selected research */}}
+  <section class="py-16" aria-labelledby="selected-work">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap items-baseline justify-between gap-4 mb-8">
+        <h2 id="selected-work" class="text-3xl font-bold text-gray-900">Selected research</h2>
+        <a href="{{ "publications/" | relURL }}" class="text-blue-700 hover:underline font-medium">All publications →</a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {{- range $page.Params.selected }}
+          {{- $work := . }}
+          {{- $pub := dict }}
+          {{- range hugo.Data.publications }}
+            {{- if eq .id $work.id }}{{ $pub = . }}{{ end }}
+          {{- end }}
+          <article class="bg-white border border-gray-200 rounded-lg p-6 sm:p-8 flex flex-col">
+            <p class="text-sm font-medium text-blue-700 mb-3">{{ $pub.role }} · {{ $pub.status }} · {{ $pub.year }}</p>
+            <h3 class="text-2xl font-semibold text-gray-900 mb-4">{{ $work.heading }}</h3>
+            <p class="text-gray-700 leading-relaxed mb-5">{{ $work.summary }}</p>
+            {{- with $work.image }}
+            <figure class="mb-5">
+              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="Enlarge figure: {{ $work.heading }}" class="block rounded-lg">
+                <img src="{{ . }}" alt="{{ $work.alt }}" class="w-full h-56 object-contain" loading="lazy" />
+              </a>
+              {{- with $work.source }}
+              <figcaption class="text-xs text-gray-500 mt-2">Experimental design and recording setup. Figure: <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-blue-700 hover:underline">MSense Lab</a>. Click the figure to enlarge.</figcaption>
+              {{- end }}
+            </figure>
+            {{- end }}
+            {{- with $work.finding }}
+            <p class="text-sm text-gray-700 leading-relaxed border-l-2 border-blue-200 pl-4 mb-5">{{ . }}</p>
+            {{- end }}
+            <p class="text-sm text-gray-500 mb-6">{{ $pub.title }}</p>
+            <div class="mt-auto flex flex-wrap gap-5 text-sm font-semibold text-blue-700">
+              <a href="{{ $pub.paper }}" target="_blank" rel="noopener noreferrer" class="hover:underline">Read preprint ↗</a>
+              {{- with $pub.code }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="hover:underline">Code & derived data ↗</a>{{ end }}
+              {{- with $work.source }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="hover:underline">Read lab story ↗</a>{{ end }}
+            </div>
+          </article>
+        {{- end }}
+      </div>
+    </div>
+  </section>
+
+  {{/* Research focus */}}
+  <section class="bg-white border-y border-gray-200 py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">Research focus</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {{- range $page.Params.focus }}
+        <div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ .title }}</h3>
+          <p class="text-gray-600 leading-relaxed">{{ .description }}</p>
+        </div>
+        {{- end }}
+      </div>
+      <a href="{{ "research/" | relURL }}" class="inline-block mt-8 text-blue-700 hover:underline font-medium">Explore my research program →</a>
+    </div>
+  </section>
+</div>
+{{ end }}

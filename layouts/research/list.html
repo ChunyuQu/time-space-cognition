@@ -1,0 +1,103 @@
+{{ define "main" }}
+<div>
+  {{/* Hero */}}
+  <section class="bg-gradient-to-br from-blue-50 to-blue-100 py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ .Title }}</h1>
+      <p class="text-lg text-gray-700">
+        {{ .Params.subtitle }}
+      </p>
+    </div>
+  </section>
+
+  {{/* Overview */}}
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">What I Study</h2>
+      {{- range $i, $p := .Params.intro }}
+      <p class="text-lg text-gray-700{{ if lt $i (sub (len $.Params.intro) 1) }} mb-6{{ end }}">
+        {{ $p | safeHTML }}
+      </p>
+      {{- end }}
+    </div>
+  </section>
+
+  {{/* Framework */}}
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-4">Research Framework</h2>
+      <p class="text-gray-700 mb-8">
+        Four stages, one modeling pipeline
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        {{- range $i, $item := .Params.stages }}
+        <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+          <div class="text-2xl font-bold text-blue-600 mb-2">{{ add $i 1 }}</div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ $item.stage }}</h3>
+          <p class="text-sm text-gray-700 mb-4">{{ $item.description }}</p>
+          <div class="text-xs font-medium">{{ $item.status }}</div>
+        </div>
+        {{- end }}
+      </div>
+    </div>
+  </section>
+
+  {{/* Visual anchors: model → brain → application */}}
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
+      {{- range .Params.anchors }}
+        {{- $a := . }}
+        {{- $frameOpen := "" }}{{ $frameClose := "" }}{{ $imgClass := "" }}
+        {{- if eq $a.frame "cover" }}
+          {{- $frameOpen = printf `<div class="bg-gray-100 rounded-lg overflow-hidden shadow-md h-80%s">` (cond $a.mobile_first " order-first md:order-last" "") }}
+          {{- $imgClass = "w-full h-full object-cover" }}
+        {{- else }}
+          {{- $frameOpen = `<div class="bg-gray-50 rounded-lg p-6 flex items-center justify-center">` }}
+          {{- $imgClass = "w-full rounded-lg shadow-md" }}
+        {{- end }}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {{- if $a.mobile_first }}
+          {{ $frameOpen | safeHTML }}
+            <img
+              src="{{ $a.image }}"
+              alt="{{ $a.image_alt }}"
+              class="{{ $imgClass }}"
+            />
+          </div>
+          {{- end }}
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">{{ $a.title }}</h3>
+            <p class="text-gray-700 {{ if $a.note }}mb-4{{ else if $a.list }}mb-6{{ end }}">
+              {{ $a.body }}
+            </p>
+            {{- with $a.list }}
+            <ul class="space-y-3 text-gray-700">
+              {{- range $i, $li := . }}
+              <li class="flex items-start">
+                <span class="text-blue-600 mr-3 font-bold">{{ add $i 1 }}.</span>
+                <span>{{ $li | safeHTML }}</span>
+              </li>
+              {{- end }}
+            </ul>
+            {{- end }}
+            {{- with $a.note }}
+            <p class="text-gray-600 text-sm">
+              {{ . | safeHTML }}
+            </p>
+            {{- end }}
+          </div>
+          {{- if not $a.mobile_first }}
+          {{ $frameOpen | safeHTML }}
+            <img
+              src="{{ $a.image }}"
+              alt="{{ $a.image_alt }}"
+              class="{{ $imgClass }}"
+            />
+          </div>
+          {{- end }}
+        </div>
+      {{- end }}
+    </div>
+  </section>
+</div>
+{{ end }}

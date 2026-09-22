@@ -1,0 +1,64 @@
+# Publication records, in display order.
+# Converted from the previous site's data/publications.ts.
+- id: attentional-thief
+  title: 'The Attentional Thief: How Self-Paced Visual Exploration Compresses Subjective Time'
+  authors: 'Qu, C., Zinchenko, A., Chen, S., & Shi, Z.'
+  year: 2026
+  venue: bioRxiv
+  role: First Author
+  status: Preprint
+  paper: https://doi.org/10.64898/2026.07.02.734699
+  code: https://github.com/msenselab/The-Attentional-Thief
+
+- id: precision-weighted-updating
+  title: 'Precision-Weighted Updating Explains Serial Dependence Across Sensory and Contextual Transitions'
+  authors: 'Qu, C., & Shi, Z.'
+  year: 2026
+  venue: bioRxiv
+  role: First Author
+  status: Preprint
+  paper: https://doi.org/10.64898/2026.06.06.730048
+
+- id: duration-serial-dependence
+  title: 'Neural Substrates of Duration Serial Dependence: Opposing Modulation in Basal Ganglia and Posterior Medial Cortex'
+  authors: 'Cheng, S., Chen, S., Wu, J., Qu, C., & Shi, Z.'
+  year: 2026
+  venue: bioRxiv
+  role: Coauthor
+  status: Preprint
+  paper: https://doi.org/10.64898/2026.05.12.724564
+
+- id: amygdala-biting
+  title: 'Central Amygdala Isl1 Neurons Control Biting by Integrating Sensory and Motivational Signals'
+  authors: 'Ding, W., …, Qu, C., Klein, R.'
+  year: 2026
+  venue: Neuron (submitted)
+  role: Coauthor
+  status: Submitted
+
+- id: dark-triad
+  title: 'Relationships between Dark Triad and negative emotions during COVID-19 lockdown: The chain mediating roles of negative coping and state boredom'
+  authors: 'Yang, M., Qu, C., et al.'
+  year: 2022
+  venue: Current Psychology · Online publication
+  role: Coauthor
+  status: Published
+  paper: https://doi.org/10.1007/s12144-022-03560-7
+
+- id: school-bullying
+  title: 'Sex differences in traditional school bullying perpetration and victimization among adolescents: A chain-mediating effect'
+  authors: 'Yang, M., Guo, H., Chu, M., Leng, C., Qu, C., Tian, K., Jing, Y., Xu, M., Guo, X., Yang, L., & Li, X.'
+  year: 2022
+  venue: International Journal of Environmental Research and Public Health, 19(15), 9525
+  role: Coauthor
+  status: Published
+  paper: https://doi.org/10.3390/ijerph19159525
+
+- id: learning-wellbeing
+  title: 'Machiavellianism and learning-related subjective well-being among Chinese senior high school students: A moderated mediation model'
+  authors: 'Yang, M., Qu, C., Guo, H., Guo, X., Tian, K., & Wang, G.'
+  year: 2022
+  venue: Frontiers in Psychology, 13, 915235
+  role: Coauthor
+  status: Published
+  paper: https://doi.org/10.3389/fpsyg.2022.915235

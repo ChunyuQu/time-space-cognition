@@ -1,0 +1,68 @@
+{{- $links := slice
+      (dict "label" "Home" "href" "/")
+      (dict "label" "Research" "href" "/research/")
+      (dict "label" "Publications" "href" "/publications/")
+      (dict "label" "Projects" "href" "/projects/")
+      (dict "label" "Experience" "href" "/experience/")
+      (dict "label" "Contact" "href" "/contact/")
+-}}
+<nav aria-label="Main navigation" class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <a href="{{ "/" | relURL }}" class="flex items-center">
+        <span class="text-xl font-bold text-gray-900">{{ site.Params.author }}</span>
+        <span class="hidden sm:inline ml-2 text-sm text-gray-600">Research · LMU</span>
+      </a>
+
+      {{/* Desktop menu */}}
+      <div class="hidden lg:flex space-x-6">
+        {{- range $links }}
+          {{- $isCurrent := eq .href $.RelPermalink }}
+          <a href="{{ .href | relURL }}"
+             {{ if $isCurrent }}aria-current="page"{{ end }}
+             class="hover:text-blue-600 text-sm font-medium {{ if $isCurrent }}text-blue-700 underline underline-offset-8{{ else }}text-gray-700{{ end }}">{{ .label }}</a>
+        {{- end }}
+      </div>
+
+      {{/* Mobile menu button */}}
+      <button
+        type="button"
+        id="nav-toggle"
+        aria-label="Open navigation"
+        aria-expanded="false"
+        aria-controls="mobile-navigation"
+        class="lg:hidden p-3 -mr-3"
+      >
+        <svg aria-hidden="true" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    {{/* Mobile menu */}}
+    <div id="mobile-navigation" hidden class="lg:hidden pb-4 space-y-2">
+      {{- range $links }}
+        {{- $isCurrent := eq .href $.RelPermalink }}
+        <a href="{{ .href | relURL }}"
+           {{ if $isCurrent }}aria-current="page"{{ end }}
+           class="block hover:text-blue-600 py-3 {{ if $isCurrent }}text-blue-700 font-semibold{{ else }}text-gray-700{{ end }}">{{ .label }}</a>
+      {{- end }}
+    </div>
+  </div>
+</nav>
+<script>
+  (function () {
+    var btn = document.getElementById('nav-toggle');
+    var menu = document.getElementById('mobile-navigation');
+    if (!btn || !menu) return;
+    function setOpen(open) {
+      menu.hidden = !open;
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+    }
+    btn.addEventListener('click', function () { setOpen(menu.hidden); });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') setOpen(false);
+    });
+  })();
+</script>

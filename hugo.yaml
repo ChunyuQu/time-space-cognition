@@ -1,0 +1,29 @@
+# Site configuration for time-space-cognition.com
+# Plain Hugo: no theme module, no template framework. Layouts and content are
+# the source of truth, and the design mirrors the previous site exactly.
+
+baseURL: 'https://time-space-cognition.com/'
+locale: en-us
+defaultContentLanguage: en
+title: 'Chunyu Qu · Cognition and Computation'
+enableRobotsTXT: true
+enableGitInfo: false
+summaryLength: 30
+timeout: 600000
+
+# The site has no taxonomies.
+disableKinds:
+  - taxonomy
+  - term
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+params:
+  author: Chunyu Qu
+  description: 'Research on serial dependence, perception of time and space, and computational neuroscience'
+  role: 'PhD Student · Neuro-Cognitive Psychology'
+  affiliation: 'LMU Munich'
+  tagline: 'I study how recent experiences shape what we perceive and decide, using computational models and behavioral and neural data.'
