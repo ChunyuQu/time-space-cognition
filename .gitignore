@@ -67,3 +67,6 @@ Desktop.ini
 
 *.log
 npm-debug.log*
+
+# Local preview scratch
+_preview/
