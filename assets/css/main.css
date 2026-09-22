@@ -117,3 +117,46 @@ a {
   @apply border-gray-200;
   margin-top: 2.5rem;
 }
+
+/* Figures lifted from the tutorial notebooks. They are wide multi-panel
+   plots, so they break out of the text column on large screens and stay
+   inside it on small ones. */
+.note-body .fig {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Never upscale: a 600px-wide plot stretched to fill an 830px column just
+   goes soft. Images render at their natural width, capped by the column. */
+.note-body .fig img {
+  @apply h-auto mx-auto rounded-lg border border-gray-200 bg-white;
+  width: auto;
+  max-width: 100%;
+}
+
+.note-body .fig a {
+  @apply block no-underline;
+}
+
+.note-body .fig a:hover img {
+  @apply border-gray-400;
+}
+
+.note-body figcaption {
+  @apply text-sm text-gray-500 mt-3 leading-relaxed;
+}
+
+.note-body figcaption code {
+  @apply bg-transparent text-gray-400 p-0 text-xs;
+}
+
+.note-body .fig-source {
+  @apply block mt-1;
+}
+
+@media (min-width: 1280px) {
+  .note-body .fig--wide {
+    width: calc(100% + 10rem);
+    margin-left: -5rem;
+  }
+}

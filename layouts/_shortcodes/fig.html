@@ -1,0 +1,32 @@
+{{- /* A figure from a notebook.
+
+     {{< fig src="vae-architecture" alt="..." caption="..." nb="04_standard_vae" href="https://..." >}}
+
+     Width and height come from the file itself so the browser reserves the
+     right space before the image loads, and the figure links to the full-size
+     file in a new tab, matching the pattern used on the home page. */ -}}
+{{- $src := .Get "src" -}}
+{{- $path := printf "static/images/vni/%s.webp" $src -}}
+{{- $url := printf "/images/vni/%s.webp" $src -}}
+{{- $cfg := images.Config $path -}}
+{{- $alt := .Get "alt" -}}
+<figure class="fig{{ if .Get "wide" }} fig--wide{{ end }}">
+  <a href="{{ $url }}" target="_blank" rel="noopener noreferrer"
+     aria-label="Open full-size figure: {{ $alt }}">
+    <img src="{{ $url }}" alt="{{ $alt }}" width="{{ $cfg.Width }}" height="{{ $cfg.Height }}" loading="lazy" decoding="async" />
+  </a>
+  {{- with .Get "caption" }}
+  <figcaption>
+    {{ . | markdownify }}
+    {{- with $.Get "nb" }}
+    <span class="fig-source">
+      {{- with $.Get "href" -}}
+      <a href="{{ . }}" target="_blank" rel="noopener noreferrer"><code>{{ $.Get "nb" }}</code></a>
+      {{- else -}}
+      <code>{{ . }}</code>
+      {{- end -}}
+    </span>
+    {{- end }}
+  </figcaption>
+  {{- end }}
+</figure>
