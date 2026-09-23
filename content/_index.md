@@ -6,7 +6,7 @@ hero:
   name: Chunyu Qu
   role: PhD Student · Neuro-Cognitive Psychology
   affiliation: LMU Munich
-  tagline: I study how recent experiences shape what we perceive and decide, using computational models and behavioral and neural data.
+  tagline: How does the brain carry one moment into the next? I model how recent experience shapes time, space, and choice—and trace these dynamics in behavior and the brain.
   image: /images/profile-photo.jpg
   buttons:
     - label: Download CV

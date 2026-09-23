@@ -17,9 +17,9 @@ projects:
     methods: 'Active exploration · EEG · Eye tracking'
 
   - title: 'Sequential Brain–Computer Interfaces'
-    question: 'How can real-time neural decoding make use of information carried across time?'
-    description: 'Hybrid EEG and fNIRS systems combine sequential neural signals with visual stimulation and interaction in virtual reality.'
-    methods: 'EEG · fNIRS · Virtual reality · Real-time decoding'
+    question: 'How can sequential neural signals support adaptive brain–computer interaction?'
+    description: 'This work connects real-time EEG-based interaction with offline computational modeling to develop adaptive brain–computer interfaces.'
+    methods: 'Real-time EEG interaction · Offline modeling'
 
   - title: 'Latent Dynamics'
     question: 'Which hidden states organize the dynamics observed in fMRI data?'
