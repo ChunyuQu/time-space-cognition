@@ -8,7 +8,10 @@
         <div>
           <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">{{ $page.Params.hero.name }}</h1>
           <p class="text-xl text-gray-700 mb-2">{{ $page.Params.hero.role }}</p>
-          <p class="text-lg text-gray-600 mb-6">{{ $page.Params.hero.affiliation }}</p>
+          <p class="text-lg text-gray-600 mb-6">
+            {{ $page.Params.hero.affiliation }}
+            {{- with $page.Params.hero.lab_url }} · <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-blue-700 hover:underline">{{ $page.Params.hero.lab }} ↗</a>{{ end }}
+          </p>
           <p class="text-lg text-gray-700 leading-relaxed mb-8">{{ $page.Params.hero.tagline }}</p>
           <div class="flex flex-wrap gap-3">
             {{- range $page.Params.hero.buttons }}
