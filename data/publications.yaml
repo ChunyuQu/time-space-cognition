@@ -19,15 +19,6 @@
   status: Preprint
   paper: https://doi.org/10.64898/2026.06.06.730048
 
-- id: duration-serial-dependence
-  title: 'Neural Substrates of Duration Serial Dependence: Opposing Modulation in Basal Ganglia and Posterior Medial Cortex'
-  authors: 'Cheng, S., Chen, S., Wu, J., Qu, C., & Shi, Z.'
-  year: 2026
-  venue: bioRxiv
-  role: Coauthor
-  status: Preprint
-  paper: https://doi.org/10.64898/2026.05.12.724564
-
 - id: amygdala-biting
   title: 'Central Amygdala Isl1 Neurons Control Biting by Integrating Sensory and Motivational Signals'
   authors: 'Ding, W., …, Qu, C., Klein, R.'
@@ -35,6 +26,15 @@
   venue: Neuron (submitted)
   role: Coauthor
   status: Submitted
+
+- id: duration-serial-dependence
+  title: 'Neural Substrates of Duration Serial Dependence: Putamen Suppression of the Prior Duration Trace'
+  authors: 'Cheng, S., Chen, S., Wu, J., Qu, C., & Shi, Z.'
+  year: 2026
+  venue: 'NeuroImage: Reports, 6(4), 100414'
+  role: Coauthor
+  status: Published
+  paper: https://doi.org/10.1016/j.ynirp.2026.100414
 
 - id: dark-triad
   title: 'Relationships between Dark Triad and negative emotions during COVID-19 lockdown: The chain mediating roles of negative coping and state boredom'
