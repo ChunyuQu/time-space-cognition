@@ -34,6 +34,7 @@ education:
     status: 'Completed'
     logos:
       - /images/logos/zzu.png
+      - /images/logos/sleep-lab.png
 
 roles:
   - position: 'PhD Student & Researcher'
