@@ -32,6 +32,8 @@ education:
     period: '09/2019 – 06/2023'
     details: 'GPA: 3.64/4.0 | Focus: Cognitive Psychology & Neuroscience'
     status: 'Completed'
+    link: 'https://sleeppsychophysiology.org/en/people/'
+    link_label: 'Sleep Psychophysiology Laboratory'
     logos:
       - /images/logos/zzu.png
       - /images/logos/sleep-lab.png
@@ -42,11 +44,15 @@ roles:
     period: '10/2025 – Present'
     description: 'Mechanisms of temporal integration and serial dependence in human cognition, combining behavioral modeling and neuroimaging.'
     logo: /images/logos/lmu.png
+    link: 'https://msense.de/about-us/'
+    link_label: 'MSense Lab profile'
   - position: 'Project Coordinator · EyeCon VR/AR Lab (Erasmus+ KA210-VET)'
     institution: 'LMU Munich × Çanakkale Onsekiz Mart University (ÇOMU)'
     period: '11/2025 – 05/2027'
     description: 'Coordinating a joint VR/EEG training program between LMU Munich and ÇOMU: training modules, international exchanges, and multiplier events.'
     logo: /images/logos/lmu.png
+    funding_logo: /images/logos/eu-emblem.svg
+    funding_label: 'Co-funded by the European Union'
   - position: 'Guest Researcher'
     institution: 'Max Planck Institute for Biological Intelligence'
     period: '10/2025 – 09/2026'
@@ -62,6 +68,8 @@ roles:
     period: '04/2023 – 09/2023'
     description: 'Research internship supervised by Dr. Tengfei Guo. Contributed to experiment design and execution, and conducted fMRI data analysis for studies on sleep, wakefulness, and light exposure.'
     logo: /images/logos/szbl.svg
+    link: 'https://guotf-lab.szbl.ac.cn/people/1077.html'
+    link_label: 'Guo Lab alumni profile'
 
 awards:
   - title: 'China Scholarship Council (CSC) PhD Scholarship'

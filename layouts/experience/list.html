@@ -87,6 +87,11 @@
           <p class="text-gray-700 font-medium mb-1">{{ .institution }}</p>
           <p class="text-gray-600 text-sm mb-2">{{ .period }}</p>
           <p class="text-gray-600 text-sm">{{ .details }}</p>
+          {{- if .link }}
+          <a href="{{ .link }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center mt-3 text-sm font-medium text-blue-700 hover:underline">
+            {{ .link_label }} <span aria-hidden="true" class="ml-1">↗</span>
+          </a>
+          {{- end }}
         </div>
         {{- end }}
       </div>
@@ -101,12 +106,23 @@
               <h3 class="text-lg font-semibold text-gray-900">{{ .position }}</h3>
               <p class="text-gray-700 font-medium">{{ .institution }}</p>
             </div>
-            <div class="shrink-0 pt-1">
+            <div class="shrink-0 pt-1 flex flex-wrap items-center gap-3">
               <img src="{{ .logo }}" alt="" class="h-10 w-auto max-w-[240px] object-contain" />
+              {{- if .funding_logo }}
+              <div class="flex items-center gap-2">
+                <img src="{{ .funding_logo }}" alt="European Union emblem" class="h-10 w-auto object-contain" />
+                <span class="max-w-24 text-xs leading-tight text-[#003399]">{{ .funding_label }}</span>
+              </div>
+              {{- end }}
             </div>
           </div>
           <p class="text-gray-600 text-sm mb-3">{{ .period }}</p>
           <p class="text-gray-600 text-sm">{{ .description }}</p>
+          {{- if .link }}
+          <a href="{{ .link }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center mt-3 text-sm font-medium text-blue-700 hover:underline">
+            {{ .link_label }} <span aria-hidden="true" class="ml-1">↗</span>
+          </a>
+          {{- end }}
         </div>
         {{- end }}
       </div>

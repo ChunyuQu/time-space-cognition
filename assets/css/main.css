@@ -160,3 +160,61 @@ a {
     margin-left: -5rem;
   }
 }
+
+/* Book-style navigation for the Model Emergence tutorial collection. */
+.modeling-shell {
+  @apply mx-auto grid w-full max-w-[1500px] gap-8 px-4 py-10 sm:px-6 lg:px-8;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.modeling-left {
+  display: none;
+}
+
+.modeling-mobile-nav {
+  @apply rounded-lg border border-slate-200 bg-white p-4 shadow-sm;
+}
+
+.modeling-mobile-nav summary {
+  @apply cursor-pointer font-semibold text-slate-900;
+}
+
+.modeling-main {
+  @apply mx-auto w-full max-w-3xl;
+}
+
+.modeling-prose {
+  @apply text-[1.02rem] leading-8;
+}
+
+.modeling-prose h2,
+.modeling-prose h3 {
+  scroll-margin-top: 6rem;
+}
+
+.modeling-notebook-toc nav > ul {
+  @apply space-y-2 border-l border-slate-200 pl-4;
+}
+
+.modeling-notebook-toc nav ul ul {
+  @apply mt-2 space-y-2 pl-3;
+}
+
+.modeling-notebook-toc a {
+  @apply block text-sm leading-snug text-slate-600 no-underline hover:text-blue-700;
+}
+
+@media (min-width: 1024px) {
+  .modeling-shell {
+    grid-template-columns: 15rem minmax(0, 1fr);
+  }
+
+  .modeling-left {
+    @apply sticky top-24 block self-start overflow-y-auto pr-2;
+    max-height: calc(100vh - 7rem);
+  }
+
+  .modeling-mobile-nav {
+    display: none;
+  }
+}

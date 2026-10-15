@@ -1,0 +1,37 @@
+{{ define "main" }}
+<div class="modeling-shell">
+  <aside class="modeling-left">
+    <nav aria-label="{{ .Title }} notebook contents" class="modeling-sidebar">
+      <a href="{{ "/modeling/" | relURL }}" class="mb-6 inline-flex items-center text-sm font-medium text-blue-700 no-underline hover:underline">
+        <span aria-hidden="true" class="mr-1">←</span> Model Emergence
+      </a>
+      <p class="text-xs font-semibold uppercase tracking-[0.16em] text-blue-600">Notebook</p>
+      <h2 class="mt-1 text-lg font-bold leading-snug text-slate-900">{{ .Title }}</h2>
+      <div class="modeling-notebook-toc mt-6">
+        <p class="mb-3 text-xs font-bold uppercase tracking-wider text-slate-500">Contents</p>
+        {{ .TableOfContents }}
+      </div>
+    </nav>
+  </aside>
+
+  <details class="modeling-mobile-nav">
+    <summary>{{ .Title }} · Contents</summary>
+    <div class="modeling-notebook-toc mt-4">{{ .TableOfContents }}</div>
+  </details>
+
+  <article class="modeling-main min-w-0">
+    <header class="mb-10 border-b border-slate-200 pb-8">
+      <p class="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-blue-600">Model Emergence</p>
+      <h1 class="text-4xl font-bold leading-tight tracking-tight text-slate-950">{{ .Title }}</h1>
+      {{- with .Params.summary }}<p class="mt-5 text-lg leading-relaxed text-slate-600">{{ . }}</p>{{- end }}
+    </header>
+
+    <div class="note-body modeling-prose">{{ .Content }}</div>
+
+    <p class="mt-16 border-t border-slate-200 pt-8">
+      <a href="{{ "/modeling/" | relURL }}" class="font-medium text-blue-700 no-underline hover:underline">← Back to Model Emergence</a>
+    </p>
+  </article>
+
+</div>
+{{ end }}

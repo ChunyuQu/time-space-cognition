@@ -1,0 +1,16 @@
+{{- $steps := split (.Get "steps") "|" -}}
+<figure class="my-8 rounded-xl border border-blue-200 bg-gradient-to-br from-blue-50 to-slate-50 p-5 sm:p-6">
+  <div class="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center justify-center gap-2" role="img" aria-label="{{ .Get "caption" }}">
+    {{- range $index, $step := $steps }}
+      {{- if gt $index 0 }}
+      <span class="self-center text-blue-500 font-bold rotate-90 sm:rotate-0" aria-hidden="true">→</span>
+      {{- end }}
+      <div class="flex-1 min-w-[8rem] rounded-lg border border-blue-200 bg-white px-3 py-3 text-center text-sm font-semibold text-slate-800 shadow-sm">
+        {{ $step }}
+      </div>
+    {{- end }}
+  </div>
+  {{- with .Get "caption" }}
+  <figcaption class="mt-4 text-center text-sm text-slate-600">{{ . }}</figcaption>
+  {{- end }}
+</figure>
