@@ -3,7 +3,7 @@ title: "5 · From logic gates to associative memory"
 date: 2026-10-15
 weight: 50
 cover: /images/foundations/05-perceptron-hopfield.webp
-summary: "McCulloch–Pitts threshold units, the perceptron learning rule and its XOR limit, Hebbian linear associators, and a Hopfield network that completes corrupted memories, all in a few lines of NumPy."
+summary: "McCulloch-Pitts threshold units, the perceptron learning rule and its XOR limit, Hebbian linear associators, and a Hopfield network that completes corrupted memories, all in a few lines of NumPy."
 math: true
 notebook: "https://github.com/ChunyuQu/time-space-cognition/blob/main/notebooks/foundations/05_perceptron_hopfield.ipynb"
 ---
@@ -25,7 +25,7 @@ plt.rcParams.update({
 rng = np.random.default_rng(0)
 ```
 
-## McCulloch–Pitts neurons compute logic
+## McCulloch-Pitts neurons compute logic
 
 McCulloch and Pitts (1943) modelled a neuron as a unit that outputs 1 if the weighted sum of
 its binary inputs reaches a threshold \(\theta\):

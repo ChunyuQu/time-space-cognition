@@ -18,7 +18,7 @@ given duration and decides whether it was closer to a "short" or a "long" refere
 come from Zhu, Baykan, Müller & Shi (*Temporal bisection is influenced by ensemble statistics of
 the stimulus set*), openly available at
 [msenselab/sets_in_bisection](https://github.com/msenselab/sets_in_bisection). In Experiment 1
-the same range, 0.4–1.6 s, was sampled with two different spacings: one set crowded at the short
+the same range, 0.4-1.6 s, was sampled with two different spacings: one set crowded at the short
 end, the other crowded at the long end. If judgments depended only on the two extremes, the
 spacing would not matter.
 

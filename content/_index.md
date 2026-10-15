@@ -8,7 +8,7 @@ hero:
   affiliation: LMU Munich
   lab: MSense Lab
   lab_url: https://msense.de/
-  tagline: How does the brain carry one moment into the next? I model how recent experience shapes time, space, and choice—and trace these dynamics in behavior and the brain.
+  tagline: How does the brain carry one moment into the next? I model how recent experience shapes time, space, and choice, then trace these dynamics in behavior and the brain.
   image: /images/profile-photo.jpg
   buttons:
     - label: Download CV
@@ -25,7 +25,7 @@ selected:
   - id: precision-weighted-updating
     heading: How does the past shape perception?
     summary: A computational account of serial dependence across sensory and contextual transitions, using precision-weighted updating.
-    finding: Dependence on history emerges from precision-weighted inference across perceptual, memory, and decision states—without an ad hoc learning rule.
+    finding: Dependence on history emerges from precision-weighted inference across perceptual, memory, and decision states, without an ad hoc learning rule.
     image: /images/kalman-filter-3state.png
     alt: Diagram of the three-state Kalman filter model
   - id: attentional-thief

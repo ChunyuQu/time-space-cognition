@@ -1,9 +1,9 @@
 ---
-title: "8 · Prediction errors: from conditioning to actor–critic"
+title: "8 · Prediction errors: from conditioning to actor-critic"
 date: 2026-10-15
 weight: 80
 cover: /images/foundations/08-reinforcement-learning.webp
-summary: "Rescorla–Wagner learning and blocking, temporal-difference errors that migrate from reward to cue like dopamine responses, value learning in a small maze, and an actor–critic agent that learns where to turn."
+summary: "Rescorla-Wagner learning and blocking, temporal-difference errors that migrate from reward to cue like dopamine responses, value learning in a small maze, and an actor-critic agent that learns where to turn."
 math: true
 notebook: "https://github.com/ChunyuQu/time-space-cognition/blob/main/notebooks/foundations/08_reinforcement_learning.ipynb"
 ---
@@ -31,7 +31,7 @@ plt.rcParams.update({
 rng = np.random.default_rng(0)
 ```
 
-## Rescorla–Wagner: learning from surprise
+## Rescorla-Wagner: learning from surprise
 
 In classical conditioning a cue (a bell) comes to predict an outcome (food). Rescorla and
 Wagner (1972) proposed that the associative strength \(V\) changes in proportion to the
@@ -85,7 +85,7 @@ Hebbian learning.
 
 ## Predicting the future: temporal-difference learning
 
-Rescorla–Wagner treats a trial as one moment. In reality a cue comes first and reward later, and
+Rescorla-Wagner treats a trial as one moment. In reality a cue comes first and reward later, and
 the goal is to predict the total future reward from each moment,
 
 $$V(t) = \mathbb E\Big[\sum_{\tau \ge 0} \gamma^\tau r(t + \tau)\Big].$$
@@ -211,9 +211,9 @@ plt.show()
 The estimates converge to the true values (dotted) and keep fluctuating around them, because
 with a constant learning rate every new random reward nudges them.
 
-## Learning to act: actor–critic
+## Learning to act: actor-critic
 
-Knowing values is not the same as acting well. In an **actor–critic** architecture two systems
+Knowing values is not the same as acting well. In an **actor-critic** architecture two systems
 share one error signal:
 
 - the **critic** learns state values with TD, \(v(s) \leftarrow v(s) + \alpha_c\,\delta\);
@@ -250,7 +250,7 @@ fig, ax = plt.subplots(figsize=(5.5, 3.4))
 for s in maze:
     ax.plot([p[s] for p in p_trace], label=f"P(left | {s})")
 ax.set(xlabel="episode", ylabel="probability", ylim=(-0.02, 1.02),
-       title="Actor–critic learns where to turn")
+       title="Actor-critic learns where to turn")
 ax.legend()
 plt.show()
 print("final critic values:", {s: round(x, 2) for s, x in v_final.items()})
@@ -270,9 +270,9 @@ where its own policy takes it.
 
 ## Summary
 
-- Rescorla–Wagner learning is driven by prediction error and explains blocking.
+- Rescorla-Wagner learning is driven by prediction error and explains blocking.
 - TD learning predicts future reward and corrects each prediction with the next one.
 - TD errors move from reward to the earliest predictive cue and dip on omission, like dopamine
   neurons; this requires a representation of elapsed time.
-- TD learning estimates state values from experience; an actor–critic uses the same error to
+- TD learning estimates state values from experience; an actor-critic uses the same error to
   improve its policy.

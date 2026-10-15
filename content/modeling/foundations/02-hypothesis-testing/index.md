@@ -58,7 +58,7 @@ grouped. The tests used in this series:
 | outcome | design | parametric | non-parametric / resampling |
 |---|---|---|---|
 | continuous | one group vs a value, or two paired conditions | one-sample / paired t-test | sign-flip permutation, Wilcoxon signed-rank |
-| continuous | two independent groups | Welch t-test | label permutation, Mann–Whitney |
+| continuous | two independent groups | Welch t-test | label permutation, Mann-Whitney |
 | continuous | several within-participant factors | repeated-measures ANOVA | permutation ANOVA, mixed models (notebook 3) |
 | binary | any | logistic regression (notebook 4) | |
 | two continuous variables | association | Pearson r | Spearman ρ, permutation |

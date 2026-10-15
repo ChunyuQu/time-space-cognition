@@ -42,4 +42,4 @@ Training should minimize MSE between sampled `noise` and `model(x_t, t)`. Revers
 
 ## Current implementation issues
 
-In `ConvNextBlock.forward()`, `self.net(h)` is called but its result is discarded; use `h = self.net(h)`. The full-attention block uses `np.einsum` on Torch tensors and then calls Torch methods on the result; both contractions should be `torch.einsum`. Finally, the provided training file stops after forward-noise visualization—it does not yet contain a complete optimizer loop or reverse sampler. The architecture is a scaffold until those pieces are added and tested on EEG-shaped tensors.
+In `ConvNextBlock.forward()`, `self.net(h)` is called but its result is discarded; use `h = self.net(h)`. The full-attention block uses `np.einsum` on Torch tensors and then calls Torch methods on the result; both contractions should be `torch.einsum`. Finally, the provided training file stops after forward-noise visualization,it does not yet contain a complete optimizer loop or reverse sampler. The architecture is a scaffold until those pieces are added and tested on EEG-shaped tensors.

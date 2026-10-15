@@ -3,7 +3,7 @@ title: 'Variational Neural Inference: an executable tutorial'
 date: 2026-09-22
 weight: 100
 cover: /images/vni/vae-architecture.webp
-summary: Eleven notebooks that run from tensors and gradients to sequential VAEs and interpretable nonlinear dynamics — a walkthrough of the models, the figures they produce, and what each one adds.
+summary: Eleven notebooks that run from tensors and gradients to sequential VAEs and interpretable nonlinear dynamics, a walkthrough of the models, the figures they produce, and what each one adds.
 ---
 
 Most introductions to variational inference either stop at the ELBO or jump
@@ -13,13 +13,13 @@ from gradients and latent variables to sequential VAEs on spike trains, where
 every step runs and every model is small enough to read.
 
 It grew out of teaching material for our lab. It assumes you know Python but not
-necessarily PyTorch, and that you care about neural data specifically — the
+necessarily PyTorch, and that you care about neural data specifically, the
 examples are spikes, posture, and latent dynamics rather than MNIST digits.
 
 **The notebooks live on GitHub:
 [msenselab/Variational-Neural-Inference](https://github.com/msenselab/Variational-Neural-Inference).**
 What follows is a walkthrough of where they go and what each stage buys you.
-Every figure below is real output from the notebook it names — click any of
+Every figure below is real output from the notebook it names, click any of
 them to open the full-size version.
 
 ## The progression
@@ -66,7 +66,7 @@ you are handed.
     href="https://github.com/msenselab/Variational-Neural-Inference/blob/main/VAE-Tutorial/Part1_Basics/02b_mixtures_em.ipynb" >}}
 
 The part worth slowing down for is what the E step actually produces. Not a
-label per point — a *distribution* over labels, which is soft exactly where the
+label per point, a *distribution* over labels, which is soft exactly where the
 data are ambiguous.
 
 {{< fig src="em-responsibilities"
@@ -76,7 +76,7 @@ data are ambiguous.
     href="https://github.com/msenselab/Variational-Neural-Inference/blob/main/VAE-Tutorial/Part1_Basics/02b_mixtures_em.ipynb" >}}
 
 The same notebook ends with stochastic EM, which is the first hint that these
-algorithms survive being run on minibatches — the thing that will later make
+algorithms survive being run on minibatches, the thing that will later make
 amortized inference practical.
 
 {{< fig src="em-stochastic"
@@ -120,7 +120,7 @@ syllables.
 ## 4. The VAE, and what amortization actually means
 
 Everything so far computed a posterior by running an algorithm per data point.
-The VAE's move is to train a network to *predict* the posterior instead — one
+The VAE's move is to train a network to *predict* the posterior instead, one
 forward pass, any data point, including ones never seen during fitting.
 
 {{< fig src="vae-architecture" wide="true"
@@ -168,7 +168,7 @@ trial, and the observation model becomes Poisson spikes.
     href="https://github.com/msenselab/Variational-Neural-Inference/blob/main/VAE-Tutorial/Part3_Variational/06_lfads.ipynb" >}}
 
 Because the data are synthetic here, the learned dynamics can be checked against
-the oscillator that actually produced them — including a Lyapunov estimate and a
+the oscillator that actually produced them, including a Lyapunov estimate and a
 phase portrait of the learned autonomous system.
 
 {{< fig src="lfads-oscillator"
@@ -198,7 +198,7 @@ still be read.
 
 {{< fig src="gpslds-local-linear"
     alt="Three vector-field panels showing the fitted dynamics linearized around three different points in latent space, each annotated with the eigenvalues of the local Jacobian. The outer two show rotation, the middle one shows a saddle."
-    caption="The payoff: linearize the fitted vector field anywhere and read off the eigenvalues. Rotation at the flanks, a saddle in between — the kind of statement an RNN generator cannot make about itself."
+    caption="The payoff: linearize the fitted vector field anywhere and read off the eigenvalues. Rotation at the flanks, a saddle in between, the kind of statement an RNN generator cannot make about itself."
     nb="08_gpslds.ipynb"
     href="https://github.com/msenselab/Variational-Neural-Inference/blob/main/VAE-Tutorial/Part4_Advanced/08_gpslds.ipynb" >}}
 
@@ -236,7 +236,7 @@ python scripts/setup_all.py
 The setup script initializes the submodules, applies the JAX and NumPy
 compatibility patches, and installs a CPU-compatible environment for all eleven
 notebooks. It is idempotent, and `--dry-run` shows what it would do. For a
-smaller install, `requirements-core.txt` covers notebooks 00–06.
+smaller install, `requirements-core.txt` covers notebooks 00-06.
 
 Where the notebooks are honest about their limits, so is this page: notebook 05
 runs its full synthetic CAVI tutorial without any download and only fetches the

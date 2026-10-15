@@ -3,7 +3,7 @@ title: 'EEG preprocessing: from continuous signals to model-ready trials'
 date: 2026-10-15
 weight: 10
 draft: true
-summary: 'Windowing, overlap, labels, and spectral features—the decisions that determine what an EEG model is actually allowed to learn.'
+summary: 'Windowing, overlap, labels, and spectral features, the decisions that determine what an EEG model is actually allowed to learn.'
 ---
 
 An EEG classifier never sees “the experiment.” It sees an array created by a chain of choices: channels, sampling rate, epoch boundaries, window length, overlap, normalization, and labels. Those choices define the statistical problem before a model is fitted.
@@ -44,7 +44,7 @@ for i in range(0, data.shape[0] - FEATURE_NUM, FRAME_NUM):
 
 For `window=1.0`, `frame=0.5`, and `sample_rate=256`, each example contains 256 samples and adjacent examples overlap by 128 samples. The intended output is `[window, time, channel]`.
 
-`EEG_filter()` then calls `neurokit2.signal_filter` for delta (1–3 Hz), theta (4–7), alpha (8–13), beta (14–30), and gamma (31 Hz upward). The file also implements descriptive statistics, entropy, Hjorth parameters, FFT summaries, wavelet features, zero crossings, and absolute or relative band power.
+`EEG_filter()` then calls `neurokit2.signal_filter` for delta (1-3 Hz), theta (4-7), alpha (8-13), beta (14-30), and gamma (31 Hz upward). The file also implements descriptive statistics, entropy, Hjorth parameters, FFT summaries, wavelet features, zero crossings, and absolute or relative band power.
 
 ## Code-level cautions
 

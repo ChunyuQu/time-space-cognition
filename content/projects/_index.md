@@ -16,9 +16,9 @@ projects:
     description: 'Behavioral, EEG, and eye-tracking studies examine spatiotemporal processing during active exploration and changing task contexts.'
     methods: 'Active exploration · EEG · Eye tracking'
 
-  - title: 'Sequential Brain–Computer Interfaces'
-    question: 'How can sequential neural signals support adaptive brain–computer interaction?'
-    description: 'This work connects real-time EEG-based interaction with offline computational modeling to develop adaptive brain–computer interfaces.'
+  - title: 'Sequential Brain-Computer Interfaces'
+    question: 'How can sequential neural signals support adaptive brain-computer interaction?'
+    description: 'This work connects real-time EEG-based interaction with offline computational modeling to develop adaptive brain-computer interfaces.'
     methods: 'Real-time EEG interaction · Offline modeling'
 
   - title: 'Latent Dynamics'

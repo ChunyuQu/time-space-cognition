@@ -4,22 +4,33 @@ date: 2026-10-15
 weight: 5
 cover: /images/foundations/foundations-overview.webp
 math: true
-summary: 'Nine executable notebooks that run from tidy behavioral data and hypothesis tests through regression, perceptrons, backpropagation, and CNNs to temporal-difference learning and population coding.'
+summary: 'Executable tutorials that move from cognitive phenomena and behavioral experiments to data, mathematical models, neural mechanisms, and testable predictions.'
 ---
 
-These notebooks are my rewrite of the foundations of computational neuroscience: the statistics,
-regression, and neural-network material that the models elsewhere on this site assume. Wherever
-possible the examples use real timing and visual-search experiments from
-[MSense Lab](https://github.com/msenselab) rather than toy datasets, and every learning rule is
-first written by hand in NumPy before a library is allowed to do it.
+This series starts with phenomena that can be experienced and measured: biases in perceived time,
+limits of attention and memory, learning from prediction errors, and the representation of a stimulus
+in neural activity. Behavioral experiments turn those questions into data. Mathematical models make
+their assumptions explicit, and neural models ask how the same computation might be implemented.
+
+Wherever possible, the examples use real timing and visual-search experiments from
+[MSense Lab](https://github.com/msenselab) rather than generic benchmark tables. Learning rules are
+first written by hand in NumPy before a library implementation is introduced, so that the code does
+not conceal the mechanism.
 
 The notebooks live in the
 [`notebooks/foundations`](https://github.com/ChunyuQu/time-space-cognition/tree/main/notebooks/foundations)
 folder of this site's repository. Each page below is generated from the executed notebook, so the
 figures are the notebook's real output.
 
-The material follows the course *Statistical and Computational Neuroscience* taught by
-Zhuanghua Shi at LMU Munich; the text and code here are my own.
+The explanations, derivations, code, simulations, and figures are developed specifically for this
+tutorial collection. Each topic follows the same scientific path:
+
+1. **Cognitive phenomenon**, what needs explaining?
+2. **Behavioral experiment**, how can it be measured?
+3. **Empirical signature**, what structure should appear in the data?
+4. **Computational model**, what is the smallest explicit account of that structure?
+5. **Neural implementation**, how could a neural system perform the computation?
+6. **Prediction and failure**, what new result would distinguish or falsify the model?
 
 ## A small mathematical toolkit
 

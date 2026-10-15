@@ -93,12 +93,12 @@ bowl because the model is linear; for neural networks it is not, but the update 
 ## The delta rule
 
 Applying the update after every single example, rather than to the average loss, gives the
-**delta rule** (Widrow–Hoff, or least mean squares):
+**delta rule** (Widrow-Hoff, or least mean squares):
 
 $$\Delta w_j = \eta\,(t - \hat y)\,x_j .$$
 
 It looks like the perceptron rule but uses the continuous error \(t - \hat y\). It is also the
-Rescorla–Wagner model of classical conditioning, where \(t - \hat y\) is the prediction error
+Rescorla-Wagner model of classical conditioning, where \(t - \hat y\) is the prediction error
 that drives learning. Notebook 8 extends that error to predictions about the future.
 
 ## Backpropagation
@@ -366,7 +366,7 @@ plt.show()
 
 - Gradient descent steps against the gradient of a loss; the learning rate trades speed for
   stability.
-- The delta rule is gradient descent for a linear unit, and the Rescorla–Wagner rule in
+- The delta rule is gradient descent for a linear unit, and the Rescorla-Wagner rule in
   disguise.
 - Backpropagation passes errors backwards with the chain rule; check hand-written gradients
   against finite differences or autograd.

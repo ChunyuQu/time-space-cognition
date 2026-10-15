@@ -82,7 +82,7 @@ the curve it carries no information at all.
 
 ## What does a neuron respond to? Spike-triggered averaging
 
-For a time-varying stimulus, a widely used description is the **linear–nonlinear–Poisson** (LNP)
+For a time-varying stimulus, a widely used description is the **linear-nonlinear-Poisson** (LNP)
 model: the stimulus is filtered by a linear temporal (or spatiotemporal) receptive field \(k\),
 passed through a static nonlinearity, and used as the rate of a Poisson process.
 
@@ -120,7 +120,7 @@ plt.show()
 
 The STA matches the filter: this neuron fires when the stimulus was positive about 10 ms
 earlier and slightly negative about 40 ms earlier, so it responds best to *increases*, a
-temporal edge detector. In two spatial dimensions the same method maps centre–surround receptive fields in the
+temporal edge detector. In two spatial dimensions the same method maps centre-surround receptive fields in the
 retina and oriented ones in V1 (notebook 7).
 
 ## Reading out a population
@@ -185,7 +185,7 @@ plt.show()
 ## How precise is the code?
 
 Decode many trials and measure the error as the population grows. For an unbiased decoder the
-variance cannot fall below the **Cramér–Rao bound** \(1/I_F(s)\), where for independent Poisson
+variance cannot fall below the **Cramér-Rao bound** \(1/I_F(s)\), where for independent Poisson
 neurons the Fisher information is
 
 $$I_F(s) = T \sum_i \frac{f_i'(s)^2}{f_i(s)} .$$
@@ -215,7 +215,7 @@ rows = np.array(rows)
 fig, ax = plt.subplots(figsize=(5.5, 3.6))
 ax.loglog(Ns, rows[:, 0], "o-", color="#ea580c", label="population vector")
 ax.loglog(Ns, rows[:, 1], "o-", color="#2563eb", label="maximum likelihood")
-ax.loglog(Ns, rows[:, 2], "k--", label="Cramér–Rao bound")
+ax.loglog(Ns, rows[:, 2], "k--", label="Cramér-Rao bound")
 ax.set(xlabel="number of neurons", ylabel="RMS error (deg)", title="Decoding error shrinks as 1/√N")
 ax.legend(fontsize=8)
 plt.show()
@@ -324,10 +324,10 @@ CV per duration: [0.032 0.031 0.029 0.032 0.03  0.03 ]
 The decoding error grows linearly with duration, so its coefficient of variation is constant:
 the **scalar property** of interval timing, Weber's law for time. Nothing about timing was built
 in except that the code is uniform in log duration. (The absolute CV here, about 3%, is far
-below the 10–20% typical of human timing because the only noise in the model is Poisson
+below the 10-20% typical of human timing because the only noise in the model is Poisson
 spiking in 40 independent neurons; the point is that the CV is constant, not its value.) Equivalent accounts place the log
 compression elsewhere (in the internal clock, or in a Bayesian observer's prior), and telling
-them apart is one of the open questions behind the experiments in notebooks 1–4.
+them apart is one of the open questions behind the experiments in notebooks 1-4.
 
 ## Summary
 
@@ -336,6 +336,6 @@ them apart is one of the open questions behind the experiments in notebooks 1–
 - The spike-triggered average recovers a neuron's linear receptive field from white-noise
   stimulation.
 - Populations can be decoded by population vector, maximum likelihood, or a full Bayesian
-  posterior; ML approaches the Cramér–Rao bound and error falls as \(1/\sqrt N\).
+  posterior; ML approaches the Cramér-Rao bound and error falls as \(1/\sqrt N\).
 - With Poisson-like noise, response gain encodes uncertainty.
 - Uniform tuning on a log-duration axis produces Weber's law for time.

@@ -6,11 +6,11 @@ draft: true
 summary: 'Replacing a fixed-activation classifier with KAN layers turns each connection into a learnable smooth function.'
 ---
 
-Most neural networks learn connection weights while keeping the activation function fixed. A Kolmogorov–Arnold Network (KAN) changes that balance: each connection can learn a smooth univariate function, commonly represented with B-splines.
+Most neural networks learn connection weights while keeping the activation function fixed. A Kolmogorov-Arnold Network (KAN) changes that balance: each connection can learn a smooth univariate function, commonly represented with B-splines.
 
 {{< flow steps="EEG [B,1,C,T]|EEGNet-style conv backbone|flattened feature vector|base SiLU linear path|B-spline basis path|sum paths|class logits" caption="KANLinear adds a learned spline contribution to a conventional activated linear projection." >}}
 
-EEGKANet uses an EEGNet-style convolutional front end to extract spatial–temporal features, then replaces ordinary fully connected layers with `KANLinear` layers. Grid size controls the number of spline intervals, spline order controls smoothness, and adaptive grid updates place knots where the observed features need resolution.
+EEGKANet uses an EEGNet-style convolutional front end to extract spatial-temporal features, then replaces ordinary fully connected layers with `KANLinear` layers. Grid size controls the number of spline intervals, spline order controls smoothness, and adaptive grid updates place knots where the observed features need resolution.
 
 ## Why this may help
 
@@ -18,11 +18,11 @@ EEG decision boundaries may depend on nonlinear feature transformations that a f
 
 The flexibility also creates risks. With small EEG datasets, high-order splines and dense grids can overfit. Comparisons should match parameter count, use participant-level validation, and report variability across seeds. Plotting the learned functions is useful only after checking that they remain stable across folds.
 
-KAN layers are therefore best treated as a testable alternative classifier head—not as a guaranteed replacement for conventional multilayer perceptrons. Their value lies in whether the learned nonlinearities are both generalizable and scientifically interpretable.
+KAN layers are therefore best treated as a testable alternative classifier head, not as a guaranteed replacement for conventional multilayer perceptrons. Their value lies in whether the learned nonlinearities are both generalizable and scientifically interpretable.
 
 ## Inside `KANLinear`
 
-The layer registers a knot grid per input feature. It learns `base_weight[out,in]` and `spline_weight[out,in,basis]`, plus an optional scaler. `b_splines()` builds basis values recursively; `curve2coeff()` uses least squares to convert sampled curves into spline coefficients.
+The layer registers a knot grid per input feature. It learns `base_weight[out, in]` and `spline_weight[out, in, basis]`, plus an optional scaler. `b_splines()` builds basis values recursively; `curve2coeff()` uses least squares to convert sampled curves into spline coefficients.
 
 The forward pass has two parallel terms:
 

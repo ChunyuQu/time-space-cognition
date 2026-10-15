@@ -264,7 +264,7 @@ The nonlinearity is called the **activation function**, and the choice matters.
 z = np.linspace(-4, 4, 400)
 acts = {
     "linear": z,
-    "step (McCulloch–Pitts)": (z > 0).astype(float),
+    "step (McCulloch-Pitts)": (z > 0).astype(float),
     "sigmoid": expit(z),
     "tanh": np.tanh(z),
     "ReLU": np.maximum(0, z),
@@ -280,7 +280,7 @@ plt.show()
 ![Figure 3](fig-03.png)
 
 - **Linear**: stacking linear units gives another linear map, so depth adds nothing.
-- **Step**: the McCulloch–Pitts threshold unit (notebook 5); not differentiable, so it cannot be
+- **Step**: the McCulloch-Pitts threshold unit (notebook 5); not differentiable, so it cannot be
   trained by gradients.
 - **Sigmoid**: a probability, as here. Its gradient vanishes in both tails, which slows learning
   in deep networks.

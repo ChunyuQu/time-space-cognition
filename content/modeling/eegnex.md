@@ -9,7 +9,7 @@ math: true
 summary: 'Dilated depthwise convolutions extend EEGNet’s temporal field without a proportional increase in parameters.'
 ---
 
-EEGNex keeps the compact spatial–temporal logic of EEGNet but replaces parts of the backbone with dilated depthwise convolutions. A dilated kernel samples the input with gaps, so its receptive field grows without requiring a much wider kernel.
+EEGNex keeps the compact spatial-temporal logic of EEGNet but replaces parts of the backbone with dilated depthwise convolutions. A dilated kernel samples the input with gaps, so its receptive field grows without requiring a much wider kernel.
 
 {{< flow steps="EEG [B,1,C,T]|standard temporal conv|dilated conv d=2|dilated conv d=4|depthwise / separable blocks|classifier" caption="EEGNex expands temporal context with two explicit dilation scales." >}}
 
@@ -48,9 +48,9 @@ The original paper's Figure 4 separates five convolutional units. The useful con
 
 | stage | role | question to check |
 |---|---|---|
-| temporal units 1–2 | build a richer temporal filter bank | what frequency response do the kernels learn? |
+| temporal units 1-2 | build a richer temporal filter bank | what frequency response do the kernels learn? |
 | spatial depthwise unit | combine electrodes within each temporal feature | does the kernel span exactly `C` electrodes? |
-| dilated units 4–5 | expand temporal context | what is the receptive field in milliseconds? |
+| dilated units 4-5 | expand temporal context | what is the receptive field in milliseconds? |
 | pooling and classifier | compress and classify | is temporal resolution discarded too early? |
 
 This is more precise than saying that dilation simply gives the model “long memory.” Dilation changes

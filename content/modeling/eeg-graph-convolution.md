@@ -3,7 +3,7 @@ title: 'Graph convolution for electrode relationships'
 date: 2026-10-15
 weight: 60
 draft: true
-summary: 'Representing electrodes as nodes makes spatial assumptions explicit—and exposes how much depends on the graph itself.'
+summary: 'Representing electrodes as nodes makes spatial assumptions explicit, and exposes how much depends on the graph itself.'
 ---
 
 A standard CNN assumes a regular grid. EEG electrodes instead lie on an irregular surface with meaningful neighborhood relations. A graph convolutional network represents each electrode as a node, its signal-derived features as node attributes, and relationships between electrodes as weighted edges.

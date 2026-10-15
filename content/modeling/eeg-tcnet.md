@@ -62,7 +62,7 @@ the batch dimension as well.
 - Increasing dilation combines short- and long-range dependencies.
 - Convolutional execution is often simpler and faster than an RNN.
 
-The main design question is whether the receptive field matches the physiological time scale of the task. Too short, and the model misses sustained motor-imagery dynamics; too long, and padding or irrelevant context can dominate. An ablation against the same front end without the TCN is necessary to show that temporal memory—not merely extra parameters—produces the gain.
+The main design question is whether the receptive field matches the physiological time scale of the task. Too short, and the model misses sustained motor-imagery dynamics; too long, and padding or irrelevant context can dominate. An ablation against the same front end without the TCN is necessary to show that temporal memory, not merely extra parameters, produces the gain.
 
 ## Reading the TCN code
 

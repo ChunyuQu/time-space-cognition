@@ -145,7 +145,7 @@ plt.show()
 ![Figure 3](fig-03.png)
 
 Two models with a similar number of parameters. The MLP flattens the image; the CNN keeps it as
-a 2D grid and uses two convolution–pooling stages.
+a 2D grid and uses two convolution-pooling stages.
 
 - `Conv2d(1, 16, 5)` learns 16 kernels of size 5×5.
 - `ReLU` is the activation from notebook 4.
@@ -236,7 +236,7 @@ plt.show()
 ![Figure 4](fig-04.png)
 
 At 5×5 pixels and after five epochs the kernels are rough, but several have an oriented
-light–dark structure, a coarse relative of the Gabors above, learned purely from the
+light-dark structure, a coarse relative of the Gabors above, learned purely from the
 classification objective. The feature maps are easier to read: some respond to the outline of
 the boot, some to the sole, some to the filled interior.
 
