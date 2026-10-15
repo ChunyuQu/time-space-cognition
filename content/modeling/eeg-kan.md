@@ -2,7 +2,7 @@
 title: 'EEGKANet: learning nonlinearities with splines'
 date: 2026-10-15
 weight: 90
-cover: /images/modeling/eeg-kan.svg
+draft: true
 summary: 'Replacing a fixed-activation classifier with KAN layers turns each connection into a learnable smooth function.'
 ---
 

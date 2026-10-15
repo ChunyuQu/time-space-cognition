@@ -2,6 +2,7 @@
 title: "8 · Prediction errors: from conditioning to actor–critic"
 date: 2026-10-15
 weight: 80
+cover: /images/foundations/08-reinforcement-learning.webp
 summary: "Rescorla–Wagner learning and blocking, temporal-difference errors that migrate from reward to cue like dopamine responses, value learning in a small maze, and an actor–critic agent that learns where to turn."
 math: true
 notebook: "https://github.com/ChunyuQu/time-space-cognition/blob/main/notebooks/foundations/08_reinforcement_learning.ipynb"

@@ -2,6 +2,7 @@
 title: "4 · Logistic regression is a psychometric function"
 date: 2026-10-15
 weight: 40
+cover: /images/foundations/04-psychometric-logistic.webp
 summary: "Fit psychometric functions by maximum likelihood written out by hand, add lapse rates, recover the bisection point and Weber fraction, and see that the same sigmoid is a single artificial neuron."
 math: true
 notebook: "https://github.com/ChunyuQu/time-space-cognition/blob/main/notebooks/foundations/04_psychometric_logistic.ipynb"

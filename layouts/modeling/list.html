@@ -27,6 +27,13 @@
                  class="w-full h-auto" loading="lazy" decoding="async" />
             {{- end }}
           </a>
+          {{- with $page.Params.cover_credit }}
+          <p class="border-b border-gray-200 bg-slate-50 px-4 py-2 text-xs text-slate-500">
+            {{- with $page.Params.cover_source }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="hover:text-blue-700 hover:underline">{{ end -}}
+            {{- $page.Params.cover_credit -}}
+            {{- with $page.Params.cover_source }}</a>{{ end -}}
+          </p>
+          {{- end }}
           {{- end }}
           <div class="p-6 sm:p-8">
             <h2 class="text-xl font-semibold text-gray-900 mb-2">

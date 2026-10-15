@@ -2,6 +2,7 @@
 title: "2 · Hypothesis testing by simulation and by formula"
 date: 2026-10-15
 weight: 20
+cover: /images/foundations/02-hypothesis-testing.webp
 summary: "Clean reaction times with a robust outlier rule, then build t-tests, permutation tests, and repeated-measures ANOVA from a visual-search experiment, checking each formula against a simulation."
 math: true
 notebook: "https://github.com/ChunyuQu/time-space-cognition/blob/main/notebooks/foundations/02_hypothesis_testing.ipynb"

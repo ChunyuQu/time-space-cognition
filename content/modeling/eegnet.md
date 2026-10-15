@@ -2,7 +2,9 @@
 title: 'From a shallow CNN to EEGNet'
 date: 2026-10-15
 weight: 30
-cover: /images/modeling/eegnet.svg
+cover: /images/modeling/eegnet-paper-figure1.png
+cover_credit: 'Figure 1 from Lawhern et al. (2018), EEGNet'
+cover_source: 'https://arxiv.org/abs/1611.08024'
 summary: 'How temporal, spatial, depthwise, and separable convolutions create a compact baseline for motor-imagery EEG.'
 ---
 

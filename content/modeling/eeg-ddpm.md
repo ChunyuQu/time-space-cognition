@@ -2,7 +2,7 @@
 title: 'Diffusion models for EEG augmentation'
 date: 2026-10-15
 weight: 70
-cover: /images/modeling/eeg-ddpm.svg
+draft: true
 summary: 'A DDPM learns to reverse progressive noise, but useful synthetic EEG requires more than visually plausible samples.'
 ---
 

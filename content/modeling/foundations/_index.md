@@ -2,6 +2,7 @@
 title: 'Foundations: statistics to population codes'
 date: 2026-10-15
 weight: 5
+cover: /images/foundations/foundations-overview.webp
 summary: 'Nine executable notebooks that run from tidy behavioral data and hypothesis tests through regression, perceptrons, backpropagation, and CNNs to temporal-difference learning and population coding.'
 ---
 

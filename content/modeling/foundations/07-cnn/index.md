@@ -2,6 +2,7 @@
 title: "7 · Convolution, receptive fields, and transfer"
 date: 2026-10-15
 weight: 70
+cover: /images/foundations/07-cnn.webp
 summary: "Convolution written by hand, Gabor filters as V1 receptive fields, an MLP versus a CNN on Fashion-MNIST, why weight sharing buys robustness to shifts, and transfer learning from twenty labeled examples per class."
 math: true
 notebook: "https://github.com/ChunyuQu/time-space-cognition/blob/main/notebooks/foundations/07_cnn.ipynb"

@@ -2,6 +2,7 @@
 title: "9 · Tuning curves and population codes"
 date: 2026-10-15
 weight: 90
+cover: /images/foundations/09-population-coding.webp
 summary: "Poisson spiking and tuning curves, a linear-nonlinear neuron recovered by spike-triggered averaging, population-vector, maximum-likelihood, and Bayesian decoding, and how log-spaced duration tuning yields Weber's law."
 math: true
 notebook: "https://github.com/ChunyuQu/time-space-cognition/blob/main/notebooks/foundations/09_population_coding.ipynb"

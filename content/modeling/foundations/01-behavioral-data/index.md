@@ -2,6 +2,7 @@
 title: "1 · Working with behavioral data"
 date: 2026-10-15
 weight: 10
+cover: /images/foundations/01-behavioral-data.webp
 summary: "Load a temporal-bisection experiment, reshape it into tidy trials, aggregate it the right way, and draw the first psychometric curves."
 math: true
 notebook: "https://github.com/ChunyuQu/time-space-cognition/blob/main/notebooks/foundations/01_behavioral_data.ipynb"

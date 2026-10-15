@@ -2,6 +2,7 @@
 title: "6 · How networks learn: gradients, backprop, and generalisation"
 date: 2026-10-15
 weight: 60
+cover: /images/foundations/06-learning.webp
 summary: "Gradient descent on a loss surface, the delta rule, backpropagation derived and coded by hand and checked against PyTorch autograd, then overfitting, cross-validation, and an unsupervised competitive-learning contrast."
 math: true
 notebook: "https://github.com/ChunyuQu/time-space-cognition/blob/main/notebooks/foundations/06_learning.ipynb"

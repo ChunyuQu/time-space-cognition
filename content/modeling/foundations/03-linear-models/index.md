@@ -2,6 +2,7 @@
 title: "3 · Linear regression to mixed models"
 date: 2026-10-15
 weight: 30
+cover: /images/foundations/03-linear-models.webp
 summary: "Derive least squares from a matrix equation, use it to measure the central-tendency effect in duration reproduction, and see why a mixed model is needed once trials are nested in participants."
 math: true
 notebook: "https://github.com/ChunyuQu/time-space-cognition/blob/main/notebooks/foundations/03_linear_models.ipynb"
