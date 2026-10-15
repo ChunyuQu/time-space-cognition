@@ -2,6 +2,7 @@
 title: 'Graph convolution for electrode relationships'
 date: 2026-10-15
 weight: 60
+draft: true
 summary: 'Representing electrodes as nodes makes spatial assumptions explicit—and exposes how much depends on the graph itself.'
 ---
 

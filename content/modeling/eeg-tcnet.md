@@ -2,6 +2,7 @@
 title: 'EEG-TCNet: causal temporal memory without recurrence'
 date: 2026-10-15
 weight: 50
+cover: /images/modeling/eeg-tcnet.svg
 summary: 'An EEGNet-style front end followed by a dilated temporal convolutional network for long-range dependencies.'
 ---
 

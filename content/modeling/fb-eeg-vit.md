@@ -2,6 +2,7 @@
 title: 'FB-EEGViT: filter banks, compact convolutions, and attention'
 date: 2026-10-15
 weight: 80
+draft: true
 summary: 'A hybrid model that moves from multi-scale frequency extraction to EEGNet features and transformer-based integration.'
 ---
 

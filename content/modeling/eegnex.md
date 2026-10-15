@@ -2,6 +2,7 @@
 title: 'EEGNex: multi-scale temporal context with dilation'
 date: 2026-10-15
 weight: 40
+cover: /images/modeling/eegnex.svg
 summary: 'Dilated depthwise convolutions extend EEGNet’s temporal field without a proportional increase in parameters.'
 ---
 

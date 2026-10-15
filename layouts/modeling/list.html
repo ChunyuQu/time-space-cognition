@@ -15,12 +15,17 @@
       {{- end }}
       <div class="space-y-6">
         {{- range .Pages }}
+        {{- $page := . }}
         <article class="bg-white rounded-lg border border-gray-200 overflow-hidden">
           {{- with .Params.cover }}
-          {{- $cfg := images.Config (printf "static%s" .) }}
-          <a href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true" class="block border-b border-gray-200 bg-white">
+          <a href="{{ $page.RelPermalink }}" tabindex="-1" aria-hidden="true" class="block border-b border-gray-200 bg-white">
+            {{- if strings.HasSuffix . ".svg" }}
+            <img src="{{ . }}" alt="" class="w-full h-auto" loading="lazy" decoding="async" />
+            {{- else }}
+            {{- $cfg := images.Config (printf "static%s" .) }}
             <img src="{{ . }}" alt="" width="{{ $cfg.Width }}" height="{{ $cfg.Height }}"
                  class="w-full h-auto" loading="lazy" decoding="async" />
+            {{- end }}
           </a>
           {{- end }}
           <div class="p-6 sm:p-8">

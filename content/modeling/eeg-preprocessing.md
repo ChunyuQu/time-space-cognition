@@ -2,6 +2,7 @@
 title: 'EEG preprocessing: from continuous signals to model-ready trials'
 date: 2026-10-15
 weight: 10
+draft: true
 summary: 'Windowing, overlap, labels, and spectral features—the decisions that determine what an EEG model is actually allowed to learn.'
 ---
 
