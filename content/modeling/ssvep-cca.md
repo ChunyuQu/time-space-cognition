@@ -2,7 +2,7 @@
 title: 'CCA and FBCCA: transparent decoding for SSVEP'
 date: 2026-10-15
 weight: 20
-cover: /images/modeling/ssvep-cca.svg
+draft: true
 summary: 'A training-light SSVEP decoder built by matching multichannel EEG to harmonic reference signals.'
 ---
 
