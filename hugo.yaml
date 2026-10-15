@@ -20,6 +20,14 @@ markup:
   goldmark:
     renderer:
       unsafe: true
+    # Maths is passed through untouched and typeset by KaTeX on pages that
+    # set `math: true` (see partials/head.html).
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block: [['$$', '$$']]
+          inline: [['\(', '\)']]
 
 params:
   author: Chunyu Qu

@@ -24,6 +24,9 @@
       <p class="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-blue-600">Model Emergence</p>
       <h1 class="text-4xl font-bold leading-tight tracking-tight text-slate-950">{{ .Title }}</h1>
       {{- with .Params.summary }}<p class="mt-5 text-lg leading-relaxed text-slate-600">{{ . }}</p>{{- end }}
+      {{- with .Params.notebook }}
+      <p class="mt-5 text-sm"><a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="font-medium text-blue-700 no-underline hover:underline">Open the notebook on GitHub →</a></p>
+      {{- end }}
     </header>
 
     <div class="note-body modeling-prose">{{ .Content }}</div>

@@ -192,6 +192,16 @@ a {
   scroll-margin-top: 6rem;
 }
 
+/* Notebook output: figures fit the column, displayed maths scrolls rather
+   than widening the page on a phone. */
+.modeling-prose img {
+  @apply mx-auto h-auto max-w-full;
+}
+
+.modeling-prose .katex-display {
+  @apply overflow-x-auto overflow-y-hidden py-1;
+}
+
 .modeling-notebook-toc nav > ul {
   @apply space-y-2 border-l border-slate-200 pl-4;
 }
