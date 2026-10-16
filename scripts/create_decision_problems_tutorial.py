@@ -36,6 +36,7 @@ nb.metadata.update(
             "slug": "10-decision-problems",
             "section": "modeling/foundations",
             "date": "2026-10-16",
+            "cover_fig": 2,
         },
     }
 )

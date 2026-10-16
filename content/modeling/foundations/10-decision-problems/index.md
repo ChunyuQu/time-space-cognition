@@ -2,6 +2,7 @@
 title: "10 · What problem is the brain solving?"
 date: 2026-10-16
 weight: 100
+cover: /images/foundations/10-decision-problems.webp
 summary: "Probability on a grid, expected utility, and why the loss function decides which point of a belief gets reported. Then a timing case: reproduction with asymmetric feedback, where decision theory predicts a shift with no free parameters, and where mean and median observers turn out to be nearly impossible to tell apart."
 math: true
 notebook: "https://github.com/ChunyuQu/time-space-cognition/blob/main/notebooks/foundations/10_decision_problems.ipynb"
