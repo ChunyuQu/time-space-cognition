@@ -1,7 +1,7 @@
-"""Create the Bayesian observer tutorial notebook (Foundations 10).
+"""Create the Bayesian observer tutorial notebook (Foundations 13).
 
     python scripts/create_bayesian_observer_tutorial.py
-    python scripts/nb_to_page.py notebooks/foundations/10_bayesian_observer.ipynb
+    python scripts/nb_to_page.py notebooks/foundations/13_bayesian_observer.ipynb
 """
 
 from pathlib import Path
@@ -10,7 +10,7 @@ import nbformat as nbf
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "notebooks" / "foundations" / "10_bayesian_observer.ipynb"
+OUT = ROOT / "notebooks" / "foundations" / "13_bayesian_observer.ipynb"
 
 
 def md(text):
@@ -30,12 +30,13 @@ nb.metadata.update(
         "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
         "language_info": {"name": "python", "version": "3"},
         "page": {
-            "title": "10: When expectations change perceived time",
-            "summary": "A duration feels longer among short ones. We turn that into a reproduction experiment, derive a Bayesian observer, find out which of its parameters the experiment can identify, give it a spiking implementation, and design the test that could reject it.",
-            "weight": 100,
-            "slug": "10-bayesian-observer",
+            "title": "13 · When expectations change perceived time",
+            "summary": "Bayes in log odds, conservatism, products of Gaussians, Weber's law from Fisher information, and neurons that add log likelihoods. Then the case: a duration feels longer among short ones. A reproduction experiment, a Bayesian observer and what the design can identify, a spiking implementation calibrated to behavior, a rival that fits equally well, and real data that break the constant noise assumption.",
+            "weight": 130,
+            "slug": "13-bayesian-observer",
             "section": "modeling/foundations",
-            "date": "2026-10-15",
+            "date": "2026-10-16",
+            "cover_fig": 4,
         },
     }
 )
@@ -49,8 +50,14 @@ Hold a stimulus on screen for 0.9 s. Among intervals that are mostly shorter, it
 intervals that are mostly longer, it seems short. Asked to reproduce it, people press a key for
 different lengths of time, although the physical interval never changed.
 
-This tutorial follows that observation as deep as one model can take it. Each stage answers one
-question:
+This tutorial follows that observation as deep as one model can take it.
+
+**Part I · Foundations** builds the inference tools: Bayes' rule in log odds, how people fall short
+of it, the product of two Gaussians, Weber's law from Fisher information, and neurons that add log
+likelihoods. It uses the probability grids of Foundations 10, the spiking neurons of Foundations 11,
+and the Fisher information of Foundations 12.
+
+**Part II · Case study** takes the context effect through six stages:
 
 | stage | question |
 |---|---|
@@ -84,7 +91,207 @@ rng = np.random.default_rng(12)
     ),
     md(
         r"""
-## 1. Cognitive phenomenon
+# Part I · Foundations
+
+## 1. Bayes' rule in log odds
+
+When there are only two hypotheses, Bayes' rule is easiest in **log odds**. Take two urns. Urn A
+holds 70 percent red balls, urn B 30 percent. One urn is picked, balls are drawn with replacement,
+and the question is which urn it was.
+
+$$\underbrace{\log\frac{P(A \mid x_{1:n})}{P(B \mid x_{1:n})}}_{\text{posterior log odds}}
+= \underbrace{\log\frac{P(A)}{P(B)}}_{\text{prior log odds}}
++ \sum_{t=1}^{n} \underbrace{\log\frac{p(x_t \mid A)}{p(x_t \mid B)}}_{\text{evidence of draw } t}.$$
+
+| symbol | meaning | array | shape |
+|---|---|---|---|
+| $x_t$ | color of draw $t$ (1 = red) | `draws` | (n_seq, n_draws) |
+| $\log p(x_t\mid A)/p(x_t\mid B)$ | how much one draw favors A: $\pm\log(0.7/0.3)$ | `llr` | (n_seq, n_draws) |
+| posterior log odds | the belief after $n$ draws | `post_lo` | (n_seq, n_draws) |
+
+Belief becomes a running sum. Each draw adds its evidence, independently of all the others.
+"""
+    ),
+    code(
+        r"""
+n_seq, n_draws = 2000, 10
+is_A = rng.random(n_seq) < 0.5                                     # (n_seq,) which urn was used
+draws = rng.random((n_seq, n_draws)) < np.where(is_A, 0.7, 0.3)[:, None]   # (n_seq, n_draws) red = True
+llr = np.where(draws, np.log(0.7 / 0.3), np.log(0.3 / 0.7))        # (n_seq, n_draws) evidence per draw
+prior_lo = 0.0                                                     # equal prior
+post_lo = prior_lo + llr.cumsum(axis=1)                            # (n_seq, n_draws) running belief
+
+acc = ((post_lo > 0) == is_A[:, None]).mean(axis=0) + 0.5 * (post_lo == 0).mean(axis=0)
+print("accuracy of the sign of the belief after 1..10 draws:", acc.round(2))
+"""
+    ),
+    md(
+        r"""
+## 2. Conservatism: people move less than Bayes
+
+In tasks like this, people's stated beliefs move in the right direction but not far enough
+(Phillips & Edwards, 1966). Grether (1980) measured it with a regression on reported log odds:
+
+$$\text{reported log odds} = \alpha \cdot \text{evidence} + \beta \cdot \text{prior log odds} + \text{noise}.$$
+
+A Bayesian has $\alpha = \beta = 1$. Typical estimates have $\alpha < 1$: evidence is
+underweighted.
+
+One way to produce this is a **tempered likelihood**: the observer raises the likelihood to a power
+below 1 before combining it with the prior,
+
+$$q(s \mid x) \propto p(x \mid s)^{1/(1+\lambda)}\, p(s).$$
+
+In log odds this simply multiplies the evidence by $\alpha = 1/(1+\lambda)$. It also follows from a
+cost on changing one's mind: if moving a belief far from the prior is penalized in proportion to the
+KL divergence, with weight $\lambda$, the optimal compromise is exactly this tempered posterior. We
+simulate a conservative observer with $\lambda = 1$ and check that the regression recovers
+$\alpha = 0.5$.
+"""
+    ),
+    code(
+        r"""
+lam = 1.0
+prior_p = rng.choice([0.3, 0.5, 0.7], n_seq)                        # (n_seq,) announced prior for A
+prior_lo_t = np.log(prior_p / (1 - prior_p))
+evidence = llr[:, :5].sum(axis=1)                                   # (n_seq,) five draws
+reported = evidence / (1 + lam) + prior_lo_t + rng.normal(0, 0.3, n_seq)   # (n_seq,) noisy report
+
+X = np.column_stack([evidence, prior_lo_t])                         # (n_seq, 2)
+(alpha_hat, beta_hat), *_ = np.linalg.lstsq(X, reported, rcond=None)
+print(f"alpha = {alpha_hat:.3f} (true {1 / (1 + lam):.3f}),  beta = {beta_hat:.3f} (true 1.000)")
+"""
+    ),
+    md(
+        r"""
+## 3. Two Gaussians make a Gaussian
+
+For continuous quantities like duration, the workhorse is a Gaussian prior combined with a Gaussian
+likelihood. With measurement $m$, likelihood $\mathcal N(m; s, \sigma_s^2)$ and prior
+$\mathcal N(s; \mu_p, \sigma_p^2)$, the log posterior is
+
+$$\log p(s \mid m) = -\frac{(m - s)^2}{2\sigma_s^2} - \frac{(s - \mu_p)^2}{2\sigma_p^2} + \text{const}.$$
+
+That is a quadratic in $s$, so the posterior is Gaussian. Setting the derivative to zero gives its
+mean, and the curvature gives its variance:
+
+$$\hat s = w\,m + (1 - w)\,\mu_p, \qquad w = \frac{\sigma_p^2}{\sigma_s^2 + \sigma_p^2}, \qquad
+\sigma_\text{post}^2 = \Big(\frac{1}{\sigma_s^2} + \frac{1}{\sigma_p^2}\Big)^{-1}.$$
+
+Precisions (inverse variances) add, and the mean is a precision weighted average. We check both
+formulas against a brute force grid posterior, as in Foundations 10.
+"""
+    ),
+    code(
+        r"""
+s_grid13 = np.linspace(-1, 3, 4001)                                 # (K,) candidate durations
+m_obs, sig_s, mu_p, sig_p = 1.2, 0.16, 0.9, 0.20
+post = norm.pdf(m_obs, s_grid13, sig_s) * norm.pdf(s_grid13, mu_p, sig_p)   # (K,) likelihood x prior
+post /= post.sum()
+w = sig_p**2 / (sig_s**2 + sig_p**2)
+print(f"posterior mean: grid {post @ s_grid13:.4f}, formula {w * m_obs + (1 - w) * mu_p:.4f}")
+print(f"posterior SD:   grid {np.sqrt(post @ (s_grid13 - post @ s_grid13) ** 2):.4f}, "
+      f"formula {(1 / sig_s**2 + 1 / sig_p**2) ** -0.5:.4f}")
+"""
+    ),
+    md(
+        r"""
+The estimate is pulled from the measurement toward the prior mean by a fraction $1 - w$. Averaged
+over measurements, the bias at duration $s$ is $(1 - w)(\mu_p - s)$: positive for short durations,
+negative for long ones. That is the central tendency, written as one line.
+
+## 4. Weber's law from Fisher information
+
+How does $\sigma_s$ depend on the duration? Foundations 11 and 12 gave two routes to the same
+answer: a bank of log spaced time constants, or an efficient code in a scale free world, both
+produce Fisher information $J(s) \propto 1/s^2$. A measurement that is Gaussian on a log scale,
+$\log m \sim \mathcal N(\log s, \sigma_w^2)$, has exactly that:
+
+$$J(s) = \frac{1}{\sigma_w^2 s^2}, \qquad \text{threshold} \propto \frac{1}{\sqrt{J(s)}} = \sigma_w\, s.$$
+
+Real timing usually adds a part that does not scale, from motor output or from a noisy start and
+stop. The two parts add as variances, giving the **generalized Weber law**:
+
+$$\sigma^2(s) = \sigma_0^2 + (k\,s)^2.$$
+
+For short durations the constant part dominates and the coefficient of variation (CV $= \sigma/s$)
+is large. For long durations the scalar part dominates and the CV levels off at $k$.
+"""
+    ),
+    code(
+        r"""
+s_range = np.linspace(0.2, 2.0, 50)
+fig, axes = plt.subplots(1, 2, figsize=(9, 3.2))
+for (sig0, k), col, name in [((0.0, 0.15), "C0", "pure Weber"), ((0.12, 0.0), "0.5", "constant"),
+                            ((0.12, 0.15), "C3", "generalized")]:
+    sd = np.sqrt(sig0**2 + (k * s_range) ** 2)                      # (50,)
+    axes[0].plot(s_range, sd, color=col, label=name)
+    axes[1].plot(s_range, sd / s_range, color=col, label=name)
+axes[0].set(xlabel="duration s (s)", ylabel="SD (s)", title="Spread")
+axes[1].set(xlabel="duration s (s)", ylabel="CV = SD / s", title="Relative spread", ylim=(0, 0.8))
+axes[1].legend(frameon=False, fontsize=8)
+plt.tight_layout()
+plt.show()
+"""
+    ),
+    md(
+        r"""
+The three noise laws make different predictions for both curves. Stage 6 uses this figure to read
+real data.
+
+## 5. Neurons that add log likelihoods
+
+Section 1 showed belief as a sum of log likelihood ratios. A population of Poisson neurons gives
+those ratios directly. To decide whether a duration was $A$ or $B$ from spike counts $n_i$:
+
+$$\text{LLR} = \sum_i n_i \log\frac{f_i(A)}{f_i(B)} - \sum_i \big(f_i(A) - f_i(B)\big).$$
+
+The first term is a weighted sum of spike counts with fixed synaptic weights $\log f_i(A)/f_i(B)$.
+The second is a constant. A downstream neuron that sums its inputs with those weights computes the
+log likelihood ratio. If spikes keep arriving, it keeps adding, exactly like the urn observer.
+Neurons in monkey parietal cortex accumulate such evidence when each cue has a learned weight
+(Yang & Shadlen, 2007).
+"""
+    ),
+    code(
+        r"""
+pref13 = np.linspace(0.2, 1.8, 40)                                  # (I,) preferred durations
+f_rate = lambda s: 0.5 * np.exp(-0.5 * ((s - pref13) / 0.15) ** 2) + 0.05   # (I,) spikes per 50 ms bin
+dA, dB = 0.85, 0.95                                                 # two similar durations
+weights = np.log(f_rate(dA) / f_rate(dB))                           # (I,) synaptic weights
+const = (f_rate(dA) - f_rate(dB)).sum()
+
+n_bins, n_tr = 12, 2000
+counts = rng.poisson(f_rate(dA), size=(n_tr, n_bins, pref13.size))   # (trials, bins, I), truth is A
+llr_t = (counts @ weights - const).cumsum(axis=1)                    # (trials, bins) running LLR
+
+fig, axes = plt.subplots(1, 2, figsize=(9, 3.2))
+axes[0].plot(np.arange(1, n_bins + 1) * 50, llr_t[:30].T, color="C0", lw=0.6)
+axes[0].axhline(0, color="0.5")
+axes[0].set(xlabel="time (ms)", ylabel="accumulated LLR", title="A downstream sum, 30 trials")
+axes[1].plot(np.arange(1, n_bins + 1) * 50, (llr_t > 0).mean(axis=0), "o-", color="C0")
+axes[1].set(xlabel="time (ms)", ylabel="P(choose A)", title="Accuracy grows with accumulated evidence",
+            ylim=(0.5, 1))
+plt.tight_layout()
+plt.show()
+"""
+    ),
+    md(
+        r"""
+### What Part I gives us
+
+- With two hypotheses, belief is a running sum of log likelihood ratios.
+- People often weight evidence by $\alpha < 1$; a tempered likelihood produces exactly that.
+- Gaussian prior times Gaussian likelihood: precisions add, the mean is a weighted average.
+- Log scale noise gives Weber's law; real timing often adds a constant part.
+- Poisson neurons give log likelihood ratios as weighted spike counts.
+
+# Part II · Case study: when expectations change perceived time
+"""
+    ),
+    md(
+        r"""
+## Stage 1 · Cognitive phenomenon
 
 Judgments of magnitude drift toward the middle of the range a person has recently experienced.
 Short intervals are overestimated, long ones underestimated. Hollingworth (1910) called this the
@@ -103,7 +310,7 @@ pulled toward the context.
     ),
     md(
         r"""
-## 2. Behavioral experiment
+## Stage 2 · Behavioral experiment
 
 **Task: temporal reproduction.** A disc appears for a duration $s$. After a short blank, the
 participant presses and holds a key for as long as the disc was shown. The hold time is the
@@ -144,7 +351,7 @@ plt.show()
         r"""
 The simulation below generates the test trials of 24 participants. Each block's durations define
 what the observer comes to expect: a mean of 0.75 s in the short context and 1.05 s in the long
-context. How the observer turns a measurement into a response is the model of stage 4; here it simply
+context. How the observer turns a measurement into a response is the model of Stage 4; here it simply
 generates data. Each participant also gets a small constant offset, because people differ in how long
 they tend to hold a key.
 """
@@ -181,7 +388,7 @@ print(f"\n{len(data)} test trials: {data['participant'].nunique()} participants 
     ),
     md(
         r"""
-## 3. Empirical signature
+## Stage 3 · Empirical signature
 
 What should the phenomenon look like in this table? Average within each participant first, then
 across participants, and look for three things:
@@ -237,7 +444,7 @@ both with the same parameters.
     ),
     md(
         r"""
-## 4. Computational model
+## Stage 4 · Computational model
 
 ### The assumptions
 
@@ -258,19 +465,11 @@ Two assumptions turn this into a model:
 
 $$m \mid s \sim \mathcal N(s, \sigma_s^2) \quad\text{(likelihood)}, \qquad s \sim \mathcal N(\mu_p, \sigma_p^2) \quad\text{(prior)}.$$
 
-### The derivation
+### The estimate
 
-By Bayes' rule the posterior is proportional to likelihood times prior. Taking logarithms and
-keeping only the terms that depend on $s$:
+Part I, section 3, derived the posterior for exactly this pair of assumptions. Its mean is
 
-$$\log p(s \mid m) = -\frac{(m - s)^2}{2\sigma_s^2} - \frac{(s - \mu_p)^2}{2\sigma_p^2} + \text{const}.$$
-
-This is a quadratic in $s$, so the posterior is Gaussian. Setting its derivative to zero gives the
-peak, which for a Gaussian is also the mean:
-
-$$\frac{m - s}{\sigma_s^2} = \frac{s - \mu_p}{\sigma_p^2}
-\quad\Longrightarrow\quad
-\hat s = w\, m + (1 - w)\, \mu_p, \qquad w = \frac{\sigma_p^2}{\sigma_s^2 + \sigma_p^2}.$$
+$$\hat s = w\, m + (1 - w)\, \mu_p, \qquad w = \frac{\sigma_p^2}{\sigma_s^2 + \sigma_p^2}.$$
 
 The estimate is a weighted average of what was measured and what was expected. The weight on the
 measurement is high when the measurement is precise ($\sigma_s$ small) or the expectation is vague
@@ -332,19 +531,26 @@ def fit_bayes(frame, n_levels=1, fixed_sensory=None):
 fit = fit_bayes(data)
 sens, prior_sd, motor_sd, offset = unpack(fit.x, 1)
 w_hat = prior_sd**2 / (sens[0]**2 + prior_sd**2)
-print(f"{'':12s}{'fitted':>8s}{'true':>8s}")
-for name, est, tru in [("sigma_s", sens[0], truth["sensory_sd"]), ("sigma_p", prior_sd, truth["prior_sd"]),
-                       ("sigma_m", motor_sd, truth["motor_sd"])]:
-    print(f"{name:12s}{est:8.3f}{tru:8.3f}")
-print(f"{'w':12s}{w_hat:8.3f}{truth['prior_sd']**2 / (truth['sensory_sd']**2 + truth['prior_sd']**2):8.3f}")
+w_true = truth["prior_sd"]**2 / (truth["sensory_sd"]**2 + truth["prior_sd"]**2)
+sd_r_hat = np.sqrt((w_hat * sens[0]) ** 2 + motor_sd**2)                 # SD of responses at fixed s
+sd_r_true = np.sqrt((w_true * truth["sensory_sd"]) ** 2 + truth["motor_sd"] ** 2)
+print(f"{'':28s}{'fitted':>8s}{'true':>8s}")
+print(f"{'w (weight on measurement)':28s}{w_hat:8.3f}{w_true:8.3f}")
+print(f"{'response SD at fixed s':28s}{sd_r_hat:8.3f}{sd_r_true:8.3f}")
+print(f"{'sigma_s':28s}{sens[0]:8.3f}{truth['sensory_sd']:8.3f}")
+print(f"{'sigma_p':28s}{prior_sd:8.3f}{truth['prior_sd']:8.3f}")
+print(f"{'sigma_m':28s}{motor_sd:8.3f}{truth['motor_sd']:8.3f}")
 """
     ),
     md(
         r"""
 ### Diagnosis: what is the experiment allowed to tell us?
 
-The weight $w$ is recovered well. The individual noise terms may or may not be, and a good fit does
-not tell us which. Count what the data constrain. The mean response pins down $w$, which depends only
+The first two rows are recovered: the weight $w$ and the spread of responses. The three noise
+terms are not. In this run the optimizer set $\sigma_m$ to zero and inflated $\sigma_s$ and
+$\sigma_p$ by the same factor, which keeps their ratio and therefore $w$, so that $w^2\sigma_s^2$
+alone carries all the response variance. The fit is as good as with the true parameters, yet the
+three numbers mean nothing on their own. Count what the data constrain. The mean response pins down $w$, which depends only
 on the **ratio** of $\sigma_s$ to $\sigma_p$. The response variance pins down one number,
 $w^2\sigma_s^2 + \sigma_m^2$. That is two constraints on three noise parameters.
 
@@ -430,15 +636,20 @@ terms. With two reliability conditions and the same number of trials, they line 
     ),
     md(
         r"""
-## 5. Neural implementation
+## Stage 5 · Neural implementation
 
-The model of stage 4 states a computation. It does not say how neurons would perform it. Here is one
+The model of Stage 4 states a computation. It does not say how neurons would perform it. Here is one
 way they could.
 
 **A population of duration-tuned neurons.** Give each of 40 neurons a preferred duration and a
 Gaussian tuning curve $f_i(s)$. On a trial, neuron $i$ emits a Poisson spike count $n_i$ with mean
 $g\,f_i(s)$. The gain $g$ stands for stimulus quality: a clear stimulus drives the neurons strongly,
 a dim one weakly.
+
+**Calibrating the gain.** The population's Fisher information is $J = g\sum_i f_i'^2/f_i$
+(Foundations 12). Its likelihood is as wide as the behavioral measurement noise when
+$J = 1/\sigma_s^2$, so we set $g = 1/(\sigma_s^2 \sum_i f_i'^2/f_i)$. This ties the neural model to the
+behavioral one with no free parameter.
 
 **Reading out a posterior.** For independent Poisson neurons the log likelihood of a duration is a
 weighted sum of spike counts,
@@ -454,7 +665,7 @@ from the spike counts.
     code(
         r"""
 preferred = np.linspace(0.2, 1.8, 40)           # preferred durations, shape [neurons]
-tuning_width = 0.15
+tuning_width = 0.6                               # broad duration tuning, in seconds
 s_axis = np.linspace(0.3, 1.6, 600)             # durations the readout considers, shape [grid]
 
 def tuning(s):
@@ -462,6 +673,13 @@ def tuning(s):
 
 def spikes(s, gain, n_trials, rng):
     return rng.poisson(gain * tuning(np.full(n_trials, s)))                # [trials, neurons]
+
+def gain_for(sensory_sd, s=0.9):
+    # Fisher information of the population is gain * sum f'^2 / f; set it to 1 / sensory_sd^2
+    g = np.exp(-0.5 * ((s - preferred) / tuning_width) ** 2)
+    f, df = g + 0.05, -g * (s - preferred) / tuning_width**2
+    return 1 / (sensory_sd**2 * (df**2 / f).sum())
+
 
 def decode(counts, gain, prior_mean, prior_sd=truth["prior_sd"]):
     F = gain * tuning(s_axis)                                              # [grid, neurons]
@@ -471,13 +689,18 @@ def decode(counts, gain, prior_mean, prior_sd=truth["prior_sd"]):
     post /= post.sum(1, keepdims=True)
     return post @ s_axis, post                                             # posterior mean, posterior
 
-n_one = spikes(0.9, gain=3.0, n_trials=1, rng=rng)
+gain_clear = gain_for(truth["sensory_sd"])                     # matches behavioral sigma_s = 0.16 s
+gain_dim = gain_for(2 * truth["sensory_sd"])                   # a dimmer stimulus: twice the noise
+print(f"gain clear {gain_clear:.3f}, gain dim {gain_dim:.3f}; expected spikes per trial at 0.9 s: "
+      f"{(gain_clear * tuning(0.9)).sum():.1f} and {(gain_dim * tuning(0.9)).sum():.1f}")
+
+n_one = spikes(0.9, gain=gain_clear, n_trials=1, rng=rng)
 fig, axes = plt.subplots(1, 2, figsize=(10, 3.6))
 axes[0].bar(preferred, n_one[0], width=0.035, color="0.35")
 axes[0].axvline(0.9, color="k", ls=":")
 axes[0].set(xlabel="preferred duration (s)", ylabel="spike count", title="One trial, s = 0.9 s")
 for context, mu in context_means.items():
-    est, post = decode(n_one, 3.0, mu)
+    est, post = decode(n_one, gain_clear, mu)
     axes[1].plot(s_axis, post[0] / post[0].max(), color=colors[context],
                  label=f"{context}: estimate {est[0]:.2f} s")
 axes[1].axvline(0.9, color="k", ls=":")
@@ -498,7 +721,7 @@ harder.
     code(
         r"""
 rows = []
-for gain, label in [(3.0, "high gain (clear)"), (0.8, "low gain (dim)")]:
+for gain, label in [(gain_clear, "clear"), (gain_dim, "dim")]:
     for s in test_durations:
         counts = spikes(s, gain, 400, rng)
         for context, mu in context_means.items():
@@ -508,12 +731,19 @@ shift = (neural.pivot_table(index=["gain", "duration"], columns="context", value
                .eval("`long context` - `short context`").groupby("gain").mean())
 print("context shift of the decoded estimate (s):")
 print(shift.round(3))
+for label, sd_s in [("clear", truth["sensory_sd"]), ("dim", 2 * truth["sensory_sd"])]:
+    w_ = truth["prior_sd"]**2 / (sd_s**2 + truth["prior_sd"]**2)
+    print(f"Bayesian prediction, {label}: (1 - w) x 0.3 s = {(1 - w_) * 0.3:.3f} s")
 """
     ),
     md(
         r"""
-The decoded estimates show the same signature as behavior, and the context shift is larger when
-the gain is low. The population carries the reliability of the evidence in its total activity, and
+The decoded shifts match the Bayesian predictions closely: about 0.12 s for the clear stimulus
+and nearly twice that for the dim one. The tuning width matters here. With narrow tuning curves, a
+likelihood as broad as behavior would rest on one or two spikes per trial, the Gaussian
+approximation behind the Fisher information would fail, and the decoded shift would overshoot.
+Broad duration tuning keeps tens of spikes per trial at the same precision.
+The context shift is larger when the gain is low. The population carries the reliability of the evidence in its total activity, and
 a downstream readout that adds a prior weights the two correctly without being told how.
 Ma, Beck, Latham and Pouget (2006) developed this idea as *probabilistic population codes*.
 
@@ -532,7 +762,7 @@ This tutorial reaches level 2.
     ),
     md(
         r"""
-## 6. Prediction and failure
+## Stage 6 · Prediction and failure
 
 ### A rival that fits the same data
 
@@ -541,7 +771,7 @@ block mean using a fixed weight $a$:
 
 $$r = a\,s + (1 - a)\,\mu_p + \varepsilon.$$
 
-On the data of stage 3 this is indistinguishable from the Bayesian observer: both give a slope
+On the data of Stage 3 this is indistinguishable from the Bayesian observer: both give a slope
 below 1 and a context shift of $(1 - a)(\mu_{\text{long}} - \mu_{\text{short}})$. A good fit to the
 original experiment cannot tell them apart.
 
@@ -549,7 +779,7 @@ original experiment cannot tell them apart.
 
 The models disagree about **reliability**. The Bayesian weight $w$ falls when the stimulus gets
 noisier, so the context shift should grow. The anchoring weight $a$ is fixed, so the shift should
-not change. The clear and noisy design of stage 4 tests exactly this. Simulate it under each model.
+not change. The clear and noisy design of Stage 4 tests exactly this. Simulate it under each model.
 """
     ),
     code(
@@ -649,28 +879,33 @@ ax.set(xlabel="presented duration (s)", ylabel="SD of reproductions (s)",
        title="Variability grows with duration")
 ax.legend(frameon=False, fontsize=8)
 plt.show()
-print((spread["mean"] / spread.index).round(3).rename("SD / duration"))
+print(pd.DataFrame({"SD": spread["mean"], "CV": spread["mean"] / spread.index}).round(3))
+
+# Generalized Weber law: SD^2 = sigma_0^2 + (k s)^2, a straight line in s^2
+slope_k2, sig0_2 = np.polyfit(spread.index.to_numpy() ** 2, spread["mean"].to_numpy() ** 2, 1)
+print(f"generalized Weber fit: sigma_0 = {np.sqrt(max(sig0_2, 0)):.3f} s, k = {np.sqrt(max(slope_k2, 0)):.3f}")
 """,
         tags=["plot"],
     ),
     md(
         r"""
-The standard deviation grows from about 0.17 s to 0.26 s across the range. Timing noise is roughly
-proportional to the duration being timed (the *scalar property*), and the model assumed it was
-constant. The mean predictions can still look right while the variance is systematically wrong.
+The standard deviation grows from about 0.17 s to 0.26 s across the range, so the constant noise
+assumption of the model is wrong. But the spread is not proportional to the duration either: the CV
+falls from about 0.33 to 0.15. Compare with the figure in Part I, section 4. The data look like the
+**generalized** Weber law, a constant part plus a scalar part, and the fit gives both. The mean
+predictions of the model can look right while its variance is systematically wrong.
 
-The standard repair keeps the Bayesian logic and changes the likelihood: let $\sigma_s$ grow with
-$s$, or equivalently assume the measurement is Gaussian on a logarithmic time scale. The posterior
-then has no closed form, but it can be computed on a grid exactly as the neural readout in stage 5
-did. That repaired model makes its own testable predictions, which is where the next tutorial can
-start.
+The repair keeps the Bayesian logic and changes the likelihood: let the measurement noise follow
+$\sigma^2(s) = \sigma_0^2 + (k s)^2$. The posterior then has no closed form, but it can be computed on a
+grid exactly as the neural readout in Stage 5 did. That repaired model makes new predictions, for
+example that the central tendency should be stronger for long durations, where noise is larger.
 
 ### The model should be rejected or revised if
 
 - the context shift is the same for clear and noisy stimuli (anchoring wins);
 - its noise parameters cannot be recovered in simulation from the design actually used;
 - it predicts the mean reproductions but misses how their spread changes with duration (it does,
-  for the version built here);
+  for the version built here: real spread follows a generalized Weber law);
 - a simpler model predicts held-out participants equally well.
 """
     ),
@@ -687,16 +922,23 @@ start.
   a second level fixes that.
 - A Poisson population plus an added log prior implements the computation without representing $w$.
 - Two models that fit the same data must be separated by the experiment where they disagree.
-- Check the variance, not only the mean. Here the constant-noise model fails on real data.
+- Check the variance, not only the mean. Here the constant noise model fails on real data, whose
+  spread follows a generalized Weber law.
 
 ## References
 
+- Grether, D. M. (1980). Bayes rule as a descriptive model: the representativeness heuristic.
+  *Quarterly Journal of Economics*, 95(3), 537 to 557.
 - Hollingworth, H. L. (1910). The central tendency of judgment. *Journal of Philosophy, Psychology
   and Scientific Methods*, 7(17), 461 to 469.
 - Jazayeri, M., & Shadlen, M. N. (2010). Temporal context calibrates interval timing. *Nature
   Neuroscience*, 13(8), 1020 to 1026.
 - Ma, W. J., Beck, J. M., Latham, P. E., & Pouget, A. (2006). Bayesian inference with probabilistic
   population codes. *Nature Neuroscience*, 9(11), 1432 to 1438.
+- Phillips, L. D., & Edwards, W. (1966). Conservatism in a simple probability inference task.
+  *Journal of Experimental Psychology*, 72(3), 346 to 354.
+- Yang, T., & Shadlen, M. N. (2007). Probabilistic reasoning by neurons. *Nature*, 447(7148), 1075
+  to 1080.
 """
     ),
 ]
