@@ -13,8 +13,91 @@ html {
 }
 
 body {
-  background-color: #f8fafc;
+  background-color: #f5f8f6;
   color: #1e293b;
+}
+
+:root {
+  --native-blue: #2563eb;
+  --wood: #426b55;
+  --wood-soft: #dfe9e2;
+  --fire: #a6473d;
+}
+
+::selection {
+  background: #dfe9e2;
+  color: #17251d;
+}
+
+/* The site's native blue remains dominant. Wood forms the supporting
+   structure; fire appears only as a small point of emphasis. */
+.site-navbar {
+  position: sticky;
+  background-color: #fbfdfb;
+}
+
+.site-navbar::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--native-blue) 0 62%, var(--wood) 62% 94%, var(--fire) 94% 100%);
+  opacity: 0.78;
+}
+
+.site-nav-current {
+  position: relative;
+}
+
+.site-nav-current::after {
+  content: "";
+  position: absolute;
+  top: 0.05rem;
+  right: -0.45rem;
+  width: 0.28rem;
+  height: 0.28rem;
+  border-radius: 9999px;
+  background: var(--fire);
+}
+
+.site-home-hero {
+  background-image:
+    radial-gradient(circle at 82% 16%, rgb(66 107 85 / 0.19), transparent 31%),
+    radial-gradient(circle at 70% 86%, rgb(166 71 61 / 0.055), transparent 20%),
+    linear-gradient(to bottom right, #f7faf8, #e7f1ea 58%, #edf4fb);
+}
+
+/* Rebalance the site's pale blue section washes toward wood green while
+   keeping blue in the gradient, so the original identity remains visible. */
+.bg-gradient-to-br.from-blue-50 {
+  background-image: linear-gradient(to bottom right, #edf5ef, #e3eee7 58%, #e8f1fa);
+}
+
+main h2 {
+  color: #315340;
+}
+
+main article {
+  border-color: #cadbcf;
+}
+
+main article:hover {
+  border-color: #91b19d;
+}
+
+.site-footer {
+  border-top: 3px solid var(--wood);
+}
+
+.site-footer h3::after {
+  content: "";
+  display: block;
+  width: 1.5rem;
+  height: 1px;
+  margin-top: 0.55rem;
+  background: linear-gradient(90deg, #6f9a81 0 82%, var(--fire) 82% 100%);
 }
 
 a {
@@ -41,8 +124,32 @@ a {
 }
 
 .note-body h2 {
-  @apply text-2xl font-bold text-gray-900;
+  @apply text-2xl font-bold;
+  color: #294b39;
   margin-top: 2.5rem;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.note-body h2::before {
+  content: "";
+  position: absolute;
+  top: 0.15em;
+  bottom: 0.12em;
+  left: 0;
+  width: 2px;
+  background: var(--wood);
+}
+
+.note-body h2::after {
+  content: "";
+  position: absolute;
+  top: 0.05em;
+  left: -0.18rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 9999px;
+  background: var(--fire);
 }
 
 .note-body h3 {
@@ -76,7 +183,7 @@ a {
 }
 
 .note-body li::marker {
-  @apply text-gray-400;
+  color: var(--wood);
 }
 
 .note-body code {
@@ -110,7 +217,12 @@ a {
 }
 
 .note-body blockquote {
-  @apply border-l-4 border-blue-500 pl-4 text-gray-600;
+  @apply border-l-4 pl-4 text-gray-600;
+  border-color: var(--wood);
+  background: #edf4ef;
+  padding-top: 0.8rem;
+  padding-right: 1rem;
+  padding-bottom: 0.8rem;
 }
 
 .note-body hr {
@@ -163,7 +275,7 @@ a {
 
 /* Book-style navigation for the Model Emergence tutorial collection. */
 .modeling-shell {
-  @apply mx-auto grid w-full max-w-[1500px] gap-8 px-4 py-10 sm:px-6 lg:px-8;
+  @apply mx-auto grid w-full max-w-[1680px] gap-8 px-4 py-10 sm:px-6 lg:px-8;
   grid-template-columns: minmax(0, 1fr);
 }
 
@@ -180,7 +292,7 @@ a {
 }
 
 .modeling-main {
-  @apply mx-auto w-full max-w-3xl;
+  @apply mx-auto w-full max-w-5xl;
 }
 
 .modeling-prose {
@@ -216,7 +328,7 @@ a {
 
 @media (min-width: 1024px) {
   .modeling-shell {
-    grid-template-columns: 15rem minmax(0, 1fr);
+    grid-template-columns: 17rem minmax(0, 1fr);
   }
 
   .modeling-left {
@@ -226,5 +338,12 @@ a {
 
   .modeling-mobile-nav {
     display: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  .modeling-shell {
+    @apply gap-12;
+    grid-template-columns: 20rem minmax(0, 1fr);
   }
 }

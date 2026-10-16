@@ -1,0 +1,38 @@
+{{ define "main" }}
+<article class="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+  <header class="mb-10">
+    <div class="mb-4 flex flex-wrap items-center gap-3 text-sm font-medium text-blue-700">
+      {{- with .Params.collection }}
+      {{ partial "reading/collection-mark.html" (dict "key" . "size" "sm") }}
+      {{- end }}
+      {{- with .Params.series }}<span>{{ . }}</span>{{- end }}
+      {{- with .Params.series_no }}<span>Issue {{ . }}</span>{{- end }}
+      {{- with .Params.topic }}<span class="rounded-full bg-blue-50 px-3 py-1">{{ . }}</span>{{- end }}
+    </div>
+    <h1 class="max-w-4xl text-4xl font-bold leading-tight text-gray-950">{{ .Title }}</h1>
+    {{- with .Params.summary }}
+    <p class="mt-5 max-w-4xl text-lg leading-8 text-gray-600">{{ . }}</p>
+    {{- end }}
+    <div class="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-gray-500">
+      <span>{{ .Date.Format "2 January 2006" }}</span>
+      {{- with .Params.author }}<span>{{ . }}</span>{{- end }}
+      {{- with .Params.source_url }}
+      <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-blue-700 hover:underline">Original paper</a>
+      {{- end }}
+    </div>
+  </header>
+
+  {{- with .Params.cover }}
+  {{- $cfg := images.Config (printf "static%s" .) }}
+  <figure class="mb-12 overflow-hidden rounded-xl border border-gray-200 bg-white">
+    <img src="{{ . }}" alt="" width="{{ $cfg.Width }}" height="{{ $cfg.Height }}" class="h-auto w-full" />
+  </figure>
+  {{- end }}
+
+  <div class="note-body mx-auto max-w-4xl text-gray-700 leading-relaxed">{{ .Content }}</div>
+
+  <p class="mx-auto mt-14 max-w-4xl border-t border-gray-200 pt-8">
+    <a href="{{ .CurrentSection.RelPermalink }}" class="font-medium text-blue-700 hover:underline">← Spacetime Rift</a>
+  </p>
+</article>
+{{ end }}

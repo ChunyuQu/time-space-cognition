@@ -7,7 +7,7 @@
       (dict "label" "Experience" "href" "/experience/")
       (dict "label" "Contact" "href" "/contact/")
 -}}
-<nav aria-label="Main navigation" class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+<nav aria-label="Main navigation" class="site-navbar sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <a href="{{ "/" | relURL }}" class="flex items-center">
@@ -22,7 +22,7 @@
           {{- $isCurrent := eq .href $.RelPermalink }}
           <a href="{{ .href | relURL }}"
              {{ if $isCurrent }}aria-current="page"{{ end }}
-             class="hover:text-blue-600 text-sm font-medium {{ if $isCurrent }}text-blue-700 underline underline-offset-8{{ else }}text-gray-700{{ end }}">{{ .label }}</a>
+             class="hover:text-blue-600 text-sm font-medium {{ if $isCurrent }}site-nav-current text-blue-700 underline underline-offset-8{{ else }}text-gray-700{{ end }}">{{ .label }}</a>
         {{- end }}
       </div>
 
@@ -47,7 +47,7 @@
         {{- $isCurrent := eq .href $.RelPermalink }}
         <a href="{{ .href | relURL }}"
            {{ if $isCurrent }}aria-current="page"{{ end }}
-           class="block hover:text-blue-600 py-3 {{ if $isCurrent }}text-blue-700 font-semibold{{ else }}text-gray-700{{ end }}">{{ .label }}</a>
+           class="block hover:text-blue-600 py-3 {{ if $isCurrent }}site-nav-current text-blue-700 font-semibold{{ else }}text-gray-700{{ end }}">{{ .label }}</a>
       {{- end }}
     </div>
   </div>

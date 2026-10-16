@@ -41,7 +41,7 @@
         </article>
         {{- end }}
       </div>
-      {{- if not .Pages }}
+      {{- if and (not .Pages) (not .Content) }}
       <p class="text-gray-600">Notes will appear here as I write them.</p>
       {{- end }}
     </div>
