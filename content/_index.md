@@ -27,10 +27,13 @@ selected:
     heading: Does serial dependence carry an action?
     summary: Three magnitude-reproduction experiments separated the previous stimulus, decision, and reporting action across duration and numerosity judgments.
     finding: Cross-dimensional attraction followed the action used to express the previous report and was weakened, but not eliminated, by task switching.
-  - id: disaster-exposure-ptg
-    heading: What shapes early posttraumatic growth?
-    summary: A survey of 1,498 people conducted within one week of the July 2021 Henan floods examined disaster exposure, emotion regulation, and Dark Triad traits.
-    finding: Early perceived growth was more closely associated with cognitive emotion-regulation patterns and personality differences than with exposure severity alone.
+  - id: attentional-thief
+    heading: Why does time pass quickly when we scroll?
+    summary: In a study of 23 adults, we compared self-paced scrolling, passive viewing, and a static baseline while recording EEG and eye movements.
+    finding: Self-paced scrolling felt shorter than passive viewing, even after accounting for gaps between images. These findings are preliminary.
+    image: /images/attentional-thief-study.webp
+    alt: Study diagram showing Scrolling, Watching, and Baseline conditions, duration and recognition tasks, and the EEG and eye-tracking setup.
+    source: https://msense.de/posts/the-attentional-thief/
 
 focus:
   - title: Serial dependence
