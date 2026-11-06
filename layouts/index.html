@@ -55,7 +55,7 @@
             {{- with $work.image }}
             <figure class="mb-5">
               <a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="Enlarge figure: {{ $work.heading }}" class="block rounded-lg">
-                <img src="{{ . }}" alt="{{ $work.alt }}" class="w-full h-56 object-contain" loading="lazy" decoding="async" />
+                <img src="{{ . }}" alt="{{ $work.alt }}"{{ with $work.image_width }} width="{{ . }}"{{ end }}{{ with $work.image_height }} height="{{ . }}"{{ end }} class="w-full h-56 object-contain" loading="lazy" decoding="async" />
               </a>
               {{- with $work.source }}
               <figcaption class="text-xs text-gray-500 mt-2">Experimental design and recording setup. Figure: <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-blue-700 hover:underline">MSense Lab</a>. Click the figure to enlarge.</figcaption>

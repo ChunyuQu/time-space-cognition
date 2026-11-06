@@ -27,6 +27,10 @@ selected:
     heading: Does serial dependence carry an action?
     summary: Three magnitude-reproduction experiments separated the previous stimulus, decision, and reporting action across duration and numerosity judgments.
     finding: Cross-dimensional attraction followed the action used to express the previous report and was weakened, but not eliminated, by task switching.
+    image: /images/serial-dependence-action-study.webp
+    image_width: 1350
+    image_height: 640
+    alt: Trial paradigm showing duration and numerosity reproduction, separate task keys, and ascending and descending response mappings.
   - id: attentional-thief
     heading: Why does time pass quickly when we scroll?
     summary: In a study of 23 adults, we compared self-paced scrolling, passive viewing, and a static baseline while recording EEG and eye movements.
