@@ -2,41 +2,34 @@
 {{ $page := . }}
 <div>
   {{/* Hero */}}
-  <section class="site-home-hero">
-    <div class="site-home-hero__inner max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="site-home-hero__grid">
-        <div class="site-home-hero__copy">
-          <p class="site-kicker">Cognition &amp; computation</p>
-          <h1>{{ $page.Params.hero.name }}</h1>
-          <p class="site-home-hero__role">{{ $page.Params.hero.role }}</p>
-          <p class="site-home-hero__affiliation">
+  <section class="site-home-hero bg-gradient-to-br from-gray-50 to-blue-50 py-16 sm:py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">{{ $page.Params.hero.name }}</h1>
+          <p class="text-xl text-gray-700 mb-2">{{ $page.Params.hero.role }}</p>
+          <p class="text-lg text-gray-600 mb-6">
             {{ $page.Params.hero.affiliation }}
-            {{- with $page.Params.hero.lab_url }} · <a href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ $page.Params.hero.lab }} ↗</a>{{ end }}
+            {{- with $page.Params.hero.lab_url }} · <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-blue-700 hover:underline">{{ $page.Params.hero.lab }} ↗</a>{{ end }}
           </p>
-          <p class="site-home-hero__tagline">{{ $page.Params.hero.tagline }}</p>
-          <div class="site-home-hero__actions">
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">{{ $page.Params.hero.tagline }}</p>
+          <div class="flex flex-wrap gap-3">
             {{- range $page.Params.hero.buttons }}
-              {{- $cls := "site-action site-action--link" }}
-              {{- if eq .style "primary" }}{{ $cls = "site-action site-action--primary" }}{{ end }}
-              {{- if eq .style "secondary" }}{{ $cls = "site-action site-action--secondary" }}{{ end }}
-              <a href="{{ .href | relURL }}"{{ with .target }} target="{{ . }}" rel="noopener noreferrer"{{ end }} class="{{ $cls }}">{{ .label }}</a>
+              {{- $cls := "px-6 py-3 text-blue-700 rounded-lg hover:bg-blue-50 font-medium" }}
+              {{- if eq .style "primary" }}{{ $cls = "px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium" }}{{ end }}
+              {{- if eq .style "secondary" }}{{ $cls = "px-6 py-3 border border-blue-600 text-blue-700 rounded-lg hover:bg-blue-50 font-medium" }}{{ end }}
+              <a href="{{ .href | relURL }}" class="{{ $cls }}">{{ .label }}</a>
             {{- end }}
           </div>
-          <div class="site-home-hero__profiles" aria-label="Academic profiles">
-            <a href="https://scholar.google.com/citations?user=xZbDxhoAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a>
-            <a href="https://orcid.org/0000-0002-7872-4645" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
-            <a href="https://github.com/ChunyuQu" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <div class="flex flex-wrap gap-x-5 gap-y-2 mt-5 text-sm font-medium text-gray-600" aria-label="Academic profiles">
+            <a href="https://scholar.google.com/citations?user=xZbDxhoAAAAJ" target="_blank" rel="noopener noreferrer" class="hover:text-blue-700 hover:underline">Google Scholar ↗</a>
+            <a href="https://orcid.org/0000-0002-7872-4645" target="_blank" rel="noopener noreferrer" class="hover:text-blue-700 hover:underline">ORCID ↗</a>
+            <a href="https://github.com/ChunyuQu" target="_blank" rel="noopener noreferrer" class="hover:text-blue-700 hover:underline">GitHub ↗</a>
           </div>
         </div>
-        <div class="site-home-hero__portrait">
-          <img src="{{ $page.Params.hero.image }}" alt="{{ $page.Params.hero.name }}" width="1280" height="1382" decoding="async" />
-          <p>Time · space · serial dependence</p>
+        <div class="rounded-lg overflow-hidden border border-gray-200">
+          <img src="{{ $page.Params.hero.image }}" alt="{{ $page.Params.hero.name }}" width="1280" height="1382" class="w-full h-auto" decoding="async" />
         </div>
-      </div>
-      <div class="site-home-hero__index" aria-label="Research focus">
-        {{- range $index, $item := $page.Params.focus }}
-        <div><span>0{{ add $index 1 }}</span><p>{{ $item.title }}</p></div>
-        {{- end }}
       </div>
     </div>
   </section>
@@ -55,14 +48,14 @@
           {{- range hugo.Data.publications }}
             {{- if eq .id $work.id }}{{ $pub = . }}{{ end }}
           {{- end }}
-          <article class="site-research-card bg-white p-6 sm:p-8 flex flex-col">
+          <article class="bg-white border border-gray-200 rounded-lg p-6 sm:p-8 flex flex-col">
             <p class="text-sm font-medium text-blue-700 mb-3">{{ $pub.role }} · {{ $pub.status }} · {{ $pub.year }}</p>
             <h3 class="text-2xl font-semibold text-gray-900 mb-4">{{ $work.heading }}</h3>
             <p class="text-gray-700 leading-relaxed mb-5">{{ $work.summary }}</p>
             {{- with $work.image }}
             <figure class="mb-5">
               <a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="Enlarge figure: {{ $work.heading }}" class="block rounded-lg">
-                <img src="{{ . }}" alt="{{ $work.alt }}" width="{{ $work.image_width }}" height="{{ $work.image_height }}" class="w-full h-56 object-contain" loading="lazy" decoding="async" />
+                <img src="{{ . }}" alt="{{ $work.alt }}" class="w-full h-56 object-contain" loading="lazy" decoding="async" />
               </a>
               {{- with $work.source }}
               <figcaption class="text-xs text-gray-500 mt-2">Experimental design and recording setup. Figure: <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-blue-700 hover:underline">MSense Lab</a>. Click the figure to enlarge.</figcaption>

@@ -5,11 +5,15 @@ subtitle: 'Research in computational modeling, neuroimaging, and behavioral scie
 
 groups:
   - status: Preprint
-    title: Preprints and manuscripts under review
-    description: 'Recent work shared as preprints or currently undergoing peer review.'
+    title: Preprints
+    description: 'Recent work shared before peer-reviewed publication.'
   - status: Published
     title: Published papers
     description: 'Peer-reviewed journal articles.'
+  - status: Submitted
+    title: Submitted manuscripts
+    description: 'Work submitted for review.'
+
 profiles:
   - label: Google Scholar
     href: https://scholar.google.com/citations?user=xZbDxhoAAAAJ

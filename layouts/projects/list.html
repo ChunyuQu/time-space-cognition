@@ -27,7 +27,7 @@
           {{- with $pub }}
           <div class="mt-5 flex flex-wrap gap-4 text-sm font-semibold text-blue-700">
             <a href="{{ printf "publications/#%s" .id | relURL }}" class="hover:underline">Publication details →</a>
-            {{- with .paper }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="hover:underline">{{ if strings.Contains $pub.status "Preprint" }}Read preprint{{ else }}Publication record{{ end }} ↗</a>{{ end }}
+            {{- with .paper }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="hover:underline">{{ if eq $pub.status "Preprint" }}Read preprint{{ else }}Publication record{{ end }} ↗</a>{{ end }}
             {{- with .code }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="hover:underline">Code & derived data ↗</a>{{ end }}
           </div>
           {{- end }}
