@@ -11,9 +11,6 @@ hero:
   tagline: How does the brain carry one moment into the next? I model how recent experience shapes time, space, and choice, then trace these dynamics in behavior and the brain.
   image: /images/profile-photo.jpg
   buttons:
-    - label: Download CV
-      href: /uploads/resume.pdf
-      style: primary
     - label: Publications
       href: /publications/
       style: secondary

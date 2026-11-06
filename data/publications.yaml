@@ -19,13 +19,24 @@
   status: Preprint
   paper: https://doi.org/10.64898/2026.06.06.730048
 
+- id: serial-dependence-action
+  title: 'Serial dependence carries the action that produced the previous report'
+  authors: 'Qu, C., Naeve, C., & Shi, Z.'
+  year: 2026
+  venue: bioRxiv
+  role: First Author
+  status: 'Preprint · Under review'
+  group: Preprint
+  paper: https://doi.org/10.64898/2026.10.27.762257
+
 - id: amygdala-biting
   title: 'Central Amygdala Isl1 Neurons Control Biting by Integrating Sensory and Motivational Signals'
   authors: 'Ding, W., …, Qu, C., Klein, R.'
   year: 2026
-  venue: Neuron (submitted)
+  venue: Manuscript under review
   role: Coauthor
-  status: Submitted
+  status: Under review
+  group: Preprint
 
 - id: duration-serial-dependence
   title: 'Neural Substrates of Duration Serial Dependence: Putamen Suppression of the Prior Duration Trace'
@@ -35,6 +46,15 @@
   role: Coauthor
   status: Published
   paper: https://doi.org/10.1016/j.ynirp.2026.100414
+
+- id: disaster-exposure-ptg
+  title: 'Disaster Exposure and Early Self-Reported Posttraumatic Growth: Indirect Associations Through Cognitive Emotion Regulation and Moderation by Dark Triad Traits'
+  authors: 'Yang, M., Cao, R., Guan, Y., Zhao, H., Wang, R., Wang, W., Ji, L., Liu, Y., & Qu, C.'
+  year: 2026
+  venue: 'Behavioral Sciences, 16(11), 2058'
+  role: Coauthor
+  status: Published
+  paper: https://doi.org/10.3390/bs16112058
 
 - id: dark-triad
   title: 'Relationships between Dark Triad and negative emotions during COVID-19 lockdown: The chain mediating roles of negative coping and state boredom'
