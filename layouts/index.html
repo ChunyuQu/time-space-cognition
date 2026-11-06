@@ -18,7 +18,7 @@
               {{- $cls := "px-6 py-3 text-blue-700 rounded-lg hover:bg-blue-50 font-medium" }}
               {{- if eq .style "primary" }}{{ $cls = "px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium" }}{{ end }}
               {{- if eq .style "secondary" }}{{ $cls = "px-6 py-3 border border-blue-600 text-blue-700 rounded-lg hover:bg-blue-50 font-medium" }}{{ end }}
-              <a href="{{ .href | relURL }}" class="{{ $cls }}">{{ .label }}</a>
+              <a href="{{ .href | relURL }}"{{ with .target }} target="{{ . }}" rel="noopener noreferrer"{{ end }} class="{{ $cls }}">{{ .label }}</a>
             {{- end }}
           </div>
           <div class="flex flex-wrap gap-x-5 gap-y-2 mt-5 text-sm font-medium text-gray-600" aria-label="Academic profiles">
