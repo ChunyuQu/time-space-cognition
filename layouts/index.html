@@ -67,7 +67,7 @@
             {{- end }}
             <p class="text-sm text-gray-500 mb-6">{{ $pub.title }}</p>
             <div class="mt-auto flex flex-wrap gap-5 text-sm font-semibold text-blue-700">
-              <a href="{{ $pub.paper }}" target="_blank" rel="noopener noreferrer" class="hover:underline">Read preprint ↗</a>
+              <a href="{{ $pub.paper }}" target="_blank" rel="noopener noreferrer" class="hover:underline">{{ if strings.Contains $pub.status "Preprint" }}Read preprint{{ else }}Read paper{{ end }} ↗</a>
               {{- with $pub.code }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="hover:underline">Code & derived data ↗</a>{{ end }}
               {{- with $work.source }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="hover:underline">Read lab story ↗</a>{{ end }}
             </div>
