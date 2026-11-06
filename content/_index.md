@@ -11,9 +11,10 @@ hero:
   tagline: How does the brain carry one moment into the next? I model how recent experience shapes time, space, and choice, then trace these dynamics in behavior and the brain.
   image: /images/profile-photo.jpg
   buttons:
-    - label: Download CV
+    - label: View CV
       href: /uploads/resume.pdf
       style: primary
+      target: _blank
     - label: Publications
       href: /publications/
       style: secondary
@@ -27,12 +28,16 @@ selected:
     summary: A computational account of serial dependence across sensory and contextual transitions, using precision-weighted updating.
     finding: Dependence on history emerges from precision-weighted inference across perceptual, memory, and decision states, without an ad hoc learning rule.
     image: /images/kalman-filter-3state.png
+    image_width: 624
+    image_height: 364
     alt: Diagram of the three-state Kalman filter model
   - id: attentional-thief
     heading: Why does time pass quickly when we scroll?
     summary: In a study of 23 adults, we compared self-paced scrolling, passive viewing, and a static baseline while recording EEG and eye movements.
     finding: Self-paced scrolling felt shorter than passive viewing, even after accounting for gaps between images. These findings are preliminary.
     image: /images/attentional-thief-study.webp
+    image_width: 1024
+    image_height: 741
     alt: Study diagram showing Scrolling, Watching, and Baseline conditions, duration and recognition tasks, and the EEG and eye-tracking setup.
     source: https://msense.de/posts/the-attentional-thief/
 
